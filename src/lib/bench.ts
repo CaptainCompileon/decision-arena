@@ -160,17 +160,20 @@ export function score(
 }
 
 export type CascadePoint = {
-  threshold: number;
+  threshold: Thresholds;
   accuracy: number;
   escalated: number; // share of items handed to the challenger
   costPer1k: number;
   answered: number;
 };
 
+// One threshold for every use case, or one per use case id.
+export type Thresholds = number | Record<string, number>;
+
 // Elephant answers first; any item where its least-confident answer is below
 // the threshold goes to the challenger. Simulated from benchmark runs, so
 // moving the slider costs nothing.
-export function cascade(useCases: UseCase[], runs: BenchRun[], threshold: number): CascadePoint {
+export function cascade(useCases: UseCase[], runs: BenchRun[], threshold: Thresholds): CascadePoint {
   let correct = 0;
   let answered = 0;
   let items = 0;
@@ -180,6 +183,7 @@ export function cascade(useCases: UseCase[], runs: BenchRun[], threshold: number
   for (const run of runs) {
     const uc = useCases.find((u) => u.id === run.useCaseId);
     if (!uc) continue;
+    const t = typeof threshold === "number" ? threshold : (threshold[uc.id] ?? 0);
     for (const ir of run.items) {
       const item = uc.items.find((i) => i.id === ir.itemId);
       const e = ir.runs.elephant;
@@ -189,7 +193,7 @@ export function cascade(useCases: UseCase[], runs: BenchRun[], threshold: number
       cost += e.result.costUsd;
       const minConfidence = Math.min(...Object.values(e.result.answers).map((a) => a.confidence));
       let answers = e.result.answers;
-      if (minConfidence < threshold && c?.ok) {
+      if (minConfidence < t && c?.ok) {
         escalated++;
         cost += c.result.costUsd;
         answers = c.result.answers;
