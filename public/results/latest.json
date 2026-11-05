@@ -1,9 +1,9 @@
 {
-  "exportedAt": "2026-11-03T11:05:44.821Z",
+  "exportedAt": "2026-11-04T17:29:23.983Z",
   "runs": {
     "issue-triage": {
       "useCaseId": "issue-triage",
-      "finishedAt": "2026-11-03T10:59:19.145Z",
+      "finishedAt": "2026-11-04T17:21:50.767Z",
       "challenger": {
         "provider": "opencode-go",
         "model": "deepseek-v4.1-flash"
@@ -84,6 +84,42 @@
                 "costUsd": 0.00018209999999999998,
                 "reason": "A hard startup crash regression affecting all Windows users in 3.2.0 is a bug that blocks users and needs a prompt fix, though it isn't data loss or a security issue."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "bug": 0.9983460016539982,
+                      "feature": 0.000081999918000082,
+                      "question": 0.0014299985700014298,
+                      "docs": 0.00014199985800014198
+                    },
+                    "pick": "bug",
+                    "confidence": 0.9983460016539982
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.03421903421903422,
+                      "1": 0.09533209533209533,
+                      "2": 0.8201758201758201,
+                      "3": 0.05027305027305027
+                    },
+                    "pick": "2",
+                    "confidence": 0.8201758201758201
+                  }
+                },
+                "latencyMs": 7893,
+                "usage": {
+                  "inputTokens": 303,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -158,6 +194,42 @@
                 },
                 "costUsd": 0.00019830000000000002,
                 "reason": "A reproducible startup crash after a version upgrade is a regression bug that blocks Windows users and should be fixed soon."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "docs": 0.000549,
+                      "question": 0.000528,
+                      "feature": 0.000082,
+                      "bug": 0.998841
+                    },
+                    "pick": "bug",
+                    "confidence": 0.998841
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.03421903421903422,
+                      "1": 0.09533209533209533,
+                      "2": 0.8201758201758201,
+                      "3": 0.05027305027305027
+                    },
+                    "pick": "2",
+                    "confidence": 0.8201758201758201
+                  }
+                },
+                "latencyMs": 5061,
+                "usage": {
+                  "inputTokens": 303,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           }
@@ -237,6 +309,42 @@
                 "costUsd": 0.0002208,
                 "reason": "Settings not matching the app's system theme is likely a theming bug or small dark-mode feature, and it is cosmetic so can wait."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "bug": 0.13559213559213557,
+                      "feature": 0.8549798549798548,
+                      "question": 0.008048008048008046,
+                      "docs": 0.0013800013800013796
+                    },
+                    "pick": "feature",
+                    "confidence": 0.8549798549798548
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.521925,
+                      "1": 0.390325,
+                      "2": 0.07875,
+                      "3": 0.009
+                    },
+                    "pick": "0",
+                    "confidence": 0.521925
+                  }
+                },
+                "latencyMs": 3848,
+                "usage": {
+                  "inputTokens": 257,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -311,6 +419,42 @@
                 },
                 "costUsd": 0.0001794,
                 "reason": "Inconsistent theming is a low-priority feature request to add dark mode support to settings."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "docs": 0.001833,
+                      "question": 0.003886,
+                      "feature": 0.850159,
+                      "bug": 0.144122
+                    },
+                    "pick": "feature",
+                    "confidence": 0.850159
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.521925,
+                      "1": 0.390325,
+                      "2": 0.07875,
+                      "3": 0.009
+                    },
+                    "pick": "0",
+                    "confidence": 0.521925
+                  }
+                },
+                "latencyMs": 5161,
+                "usage": {
+                  "inputTokens": 257,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           }
@@ -390,6 +534,42 @@
                 "costUsd": 0.00032744999999999996,
                 "reason": "The author is asking for help finding proxy configuration, which may indicate a missing feature or unclear docs, and lack of proxy support can block office users."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "bug": 0.001991,
+                      "feature": 0.00287,
+                      "question": 0.977175,
+                      "docs": 0.017964
+                    },
+                    "pick": "question",
+                    "confidence": 0.977175
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.341652,
+                      "1": 0.396786,
+                      "2": 0.243706,
+                      "3": 0.017856
+                    },
+                    "pick": "1",
+                    "confidence": 0.396786
+                  }
+                },
+                "latencyMs": 3805,
+                "usage": {
+                  "inputTokens": 260,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -464,6 +644,42 @@
                 },
                 "costUsd": 0.00026744999999999997,
                 "reason": "The user is asking whether proxy configuration exists and where to find it, which is primarily a help/question issue with possible documentation gaps and low urgency."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "docs": 0.017714000000000004,
+                      "question": 0.9773430000000001,
+                      "feature": 0.0032730000000000003,
+                      "bug": 0.0016700000000000003
+                    },
+                    "pick": "question",
+                    "confidence": 0.9773430000000001
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.341652,
+                      "1": 0.396786,
+                      "2": 0.243706,
+                      "3": 0.017856
+                    },
+                    "pick": "1",
+                    "confidence": 0.396786
+                  }
+                },
+                "latencyMs": 3675,
+                "usage": {
+                  "inputTokens": 260,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           }
@@ -543,6 +759,42 @@
                 "costUsd": 0.00023505000000000002,
                 "reason": "The README documents a removed flag, which immediately breaks the quick-start flow for new users, so it is a docs issue that should be fixed soon."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "bug": 0.083943,
+                      "feature": 0.001204,
+                      "question": 0.001867,
+                      "docs": 0.912986
+                    },
+                    "pick": "docs",
+                    "confidence": 0.912986
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.047748,
+                      "1": 0.15959,
+                      "2": 0.762934,
+                      "3": 0.029728
+                    },
+                    "pick": "2",
+                    "confidence": 0.762934
+                  }
+                },
+                "latencyMs": 4108,
+                "usage": {
+                  "inputTokens": 269,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -617,6 +869,42 @@
                 },
                 "costUsd": 0.00011444999999999999,
                 "reason": "A stale README command breaks users' very first run, so it's primarily a docs fix with moderate-to-high urgency since it blocks onboarding."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "docs": 0.951984,
+                      "question": 0.001717,
+                      "feature": 0.001147,
+                      "bug": 0.045152
+                    },
+                    "pick": "docs",
+                    "confidence": 0.951984
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.047748,
+                      "1": 0.15959,
+                      "2": 0.762934,
+                      "3": 0.029728
+                    },
+                    "pick": "2",
+                    "confidence": 0.762934
+                  }
+                },
+                "latencyMs": 5323,
+                "usage": {
+                  "inputTokens": 269,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           }
@@ -696,6 +984,42 @@
                 "costUsd": 0.00035234999999999997,
                 "reason": "Silent omission of rows with commas is broken export behavior and constitutes data loss in the generated file, warranting urgent attention."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "bug": 0.998186,
+                      "feature": 0.000189,
+                      "question": 0.001124,
+                      "docs": 0.000501
+                    },
+                    "pick": "bug",
+                    "confidence": 0.998186
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.040418,
+                      "1": 0.240195,
+                      "2": 0.413224,
+                      "3": 0.306163
+                    },
+                    "pick": "2",
+                    "confidence": 0.413224
+                  }
+                },
+                "latencyMs": 4257,
+                "usage": {
+                  "inputTokens": 266,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -770,6 +1094,42 @@
                 },
                 "costUsd": 0.00031935,
                 "reason": "Silent omission of rows from CSV export is a data-integrity bug that can cause incorrect totals and should be fixed urgently."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "docs": 0.002278002278002278,
+                      "question": 0.000576000576000576,
+                      "feature": 0.00044700044700044704,
+                      "bug": 0.9966989966989968
+                    },
+                    "pick": "bug",
+                    "confidence": 0.9966989966989968
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.040418,
+                      "1": 0.240195,
+                      "2": 0.413224,
+                      "3": 0.306163
+                    },
+                    "pick": "2",
+                    "confidence": 0.413224
+                  }
+                },
+                "latencyMs": 3843,
+                "usage": {
+                  "inputTokens": 266,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           }
@@ -849,6 +1209,42 @@
                 "costUsd": 0.00016094999999999998,
                 "reason": "Saving a draft permanently overwrites published articles, indicating a data-loss bug requiring emergency action."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "bug": 0.9997,
+                      "feature": 0.000065,
+                      "question": 0.000161,
+                      "docs": 0.000074
+                    },
+                    "pick": "bug",
+                    "confidence": 0.9997
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.000613,
+                      "1": 0.001331,
+                      "2": 0.008581,
+                      "3": 0.989475
+                    },
+                    "pick": "3",
+                    "confidence": 0.989475
+                  }
+                },
+                "latencyMs": 4359,
+                "usage": {
+                  "inputTokens": 265,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -923,6 +1319,42 @@
                 },
                 "costUsd": 0.00016214999999999998,
                 "reason": "Saving a draft unexpectedly overwrites published content and deletes history, causing confirmed data loss for customers."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "docs": 0.000298,
+                      "question": 0.000029,
+                      "feature": 0.000056,
+                      "bug": 0.999617
+                    },
+                    "pick": "bug",
+                    "confidence": 0.999617
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.000613,
+                      "1": 0.001331,
+                      "2": 0.008581,
+                      "3": 0.989475
+                    },
+                    "pick": "3",
+                    "confidence": 0.989475
+                  }
+                },
+                "latencyMs": 4271,
+                "usage": {
+                  "inputTokens": 265,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           }
@@ -1002,6 +1434,42 @@
                 "costUsd": 0.0001461,
                 "reason": "Debug logging leaks Authorization headers to a third-party log service, which is a security defect requiring immediate remediation."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "bug": 0.95057,
+                      "feature": 0.005488,
+                      "question": 0.032681,
+                      "docs": 0.011261
+                    },
+                    "pick": "bug",
+                    "confidence": 0.95057
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.007845,
+                      "1": 0.059569,
+                      "2": 0.077195,
+                      "3": 0.855391
+                    },
+                    "pick": "3",
+                    "confidence": 0.855391
+                  }
+                },
+                "latencyMs": 4087,
+                "usage": {
+                  "inputTokens": 262,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -1076,6 +1544,42 @@
                 },
                 "costUsd": 0.0001605,
                 "reason": "Debug logging exposes Authorization headers, a security vulnerability requiring emergency action."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "docs": 0.032965,
+                      "question": 0.020873,
+                      "feature": 0.01164,
+                      "bug": 0.934522
+                    },
+                    "pick": "bug",
+                    "confidence": 0.934522
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.007845,
+                      "1": 0.059569,
+                      "2": 0.077195,
+                      "3": 0.855391
+                    },
+                    "pick": "3",
+                    "confidence": 0.855391
+                  }
+                },
+                "latencyMs": 6019,
+                "usage": {
+                  "inputTokens": 262,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           }
@@ -1155,6 +1659,42 @@
                 "costUsd": 0.00017294999999999998,
                 "reason": "This requests a new Parquet export capability, which is a non-urgent feature enhancement."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "bug": 0.0008710008710008712,
+                      "feature": 0.9979379979379981,
+                      "question": 0.000996000996000996,
+                      "docs": 0.00019500019500019502
+                    },
+                    "pick": "feature",
+                    "confidence": 0.9979379979379981
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.5047240000000001,
+                      "1": 0.46795100000000006,
+                      "2": 0.022265000000000004,
+                      "3": 0.005060000000000001
+                    },
+                    "pick": "0",
+                    "confidence": 0.5047240000000001
+                  }
+                },
+                "latencyMs": 5656,
+                "usage": {
+                  "inputTokens": 250,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -1229,6 +1769,42 @@
                 },
                 "costUsd": 0.00017475,
                 "reason": "The request asks for a new Parquet export capability, not a broken behavior, and it is a non-blocking enhancement."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "docs": 0.000498,
+                      "question": 0.000648,
+                      "feature": 0.998343,
+                      "bug": 0.000511
+                    },
+                    "pick": "feature",
+                    "confidence": 0.998343
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.5047240000000001,
+                      "1": 0.46795100000000006,
+                      "2": 0.022265000000000004,
+                      "3": 0.005060000000000001
+                    },
+                    "pick": "0",
+                    "confidence": 0.5047240000000001
+                  }
+                },
+                "latencyMs": 3623,
+                "usage": {
+                  "inputTokens": 250,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           }
@@ -1308,6 +1884,42 @@
                 "costUsd": 0.00022035,
                 "reason": "The author is asking for deployment/networking clarification before rollout, not reporting broken behavior or requesting a feature."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "bug": 0.001302,
+                      "feature": 0.001428,
+                      "question": 0.995411,
+                      "docs": 0.001859
+                    },
+                    "pick": "question",
+                    "confidence": 0.995411
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.3176273176273176,
+                      "1": 0.5655115655115656,
+                      "2": 0.1093941093941094,
+                      "3": 0.007467007467007467
+                    },
+                    "pick": "1",
+                    "confidence": 0.5655115655115656
+                  }
+                },
+                "latencyMs": 3946,
+                "usage": {
+                  "inputTokens": 256,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -1382,6 +1994,42 @@
                 },
                 "costUsd": 0.00029055,
                 "reason": "This is a pre-rollout clarification question about required outbound ports, not a bug or feature request, and it is timing-sensitive but not currently blocking users."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "docs": 0.001837,
+                      "question": 0.996127,
+                      "feature": 0.001155,
+                      "bug": 0.000881
+                    },
+                    "pick": "question",
+                    "confidence": 0.996127
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.3176273176273176,
+                      "1": 0.5655115655115656,
+                      "2": 0.1093941093941094,
+                      "3": 0.007467007467007467
+                    },
+                    "pick": "1",
+                    "confidence": 0.5655115655115656
+                  }
+                },
+                "latencyMs": 3623,
+                "usage": {
+                  "inputTokens": 256,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           }
@@ -1461,6 +2109,42 @@
                 "costUsd": 0.00026475,
                 "reason": "The documentation contradicts the actual millisecond behavior, and following it can block requests now."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "bug": 0.115364,
+                      "feature": 0.00168,
+                      "question": 0.02198,
+                      "docs": 0.860976
+                    },
+                    "pick": "docs",
+                    "confidence": 0.860976
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.071269,
+                      "1": 0.158294,
+                      "2": 0.707076,
+                      "3": 0.063361
+                    },
+                    "pick": "2",
+                    "confidence": 0.707076
+                  }
+                },
+                "latencyMs": 5654,
+                "usage": {
+                  "inputTokens": 283,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -1535,6 +2219,42 @@
                 },
                 "costUsd": 0.00039195,
                 "reason": "The config reference contradicts the actual millisecond behavior, and the misleading default can cause request timeouts, so maintainers should correct the docs soon."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "docs": 0.9406850000000001,
+                      "question": 0.010593000000000002,
+                      "feature": 0.0012070000000000002,
+                      "bug": 0.04751500000000001
+                    },
+                    "pick": "docs",
+                    "confidence": 0.9406850000000001
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.071269,
+                      "1": 0.158294,
+                      "2": 0.707076,
+                      "3": 0.063361
+                    },
+                    "pick": "2",
+                    "confidence": 0.707076
+                  }
+                },
+                "latencyMs": 4283,
+                "usage": {
+                  "inputTokens": 283,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           }
@@ -1614,6 +2334,42 @@
                 "costUsd": 0.00028514999999999997,
                 "reason": "A spelling typo in an error message is a minor defect that can wait for a future release."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "bug": 0.8725761274238727,
+                      "feature": 0.012990987009012992,
+                      "question": 0.031031968968031034,
+                      "docs": 0.08340091659908341
+                    },
+                    "pick": "bug",
+                    "confidence": 0.8725761274238727
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.545335,
+                      "1": 0.341859,
+                      "2": 0.102664,
+                      "3": 0.010142
+                    },
+                    "pick": "0",
+                    "confidence": 0.545335
+                  }
+                },
+                "latencyMs": 7256,
+                "usage": {
+                  "inputTokens": 243,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -1688,6 +2444,42 @@
                 },
                 "costUsd": 0.00020355,
                 "reason": "A misspelled error message is a minor text bug, not urgent."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "docs": 0.2063942063942064,
+                      "question": 0.023224023224023227,
+                      "feature": 0.017713017713017712,
+                      "bug": 0.7526687526687527
+                    },
+                    "pick": "bug",
+                    "confidence": 0.7526687526687527
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.545335,
+                      "1": 0.341859,
+                      "2": 0.102664,
+                      "3": 0.010142
+                    },
+                    "pick": "0",
+                    "confidence": 0.545335
+                  }
+                },
+                "latencyMs": 3583,
+                "usage": {
+                  "inputTokens": 243,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           }
@@ -1767,6 +2559,42 @@
                 "costUsd": 0.00016695,
                 "reason": "This is a non-blocking feature request for a new keyboard shortcut."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "bug": 0.003969,
+                      "feature": 0.981931,
+                      "question": 0.012164,
+                      "docs": 0.001936
+                    },
+                    "pick": "feature",
+                    "confidence": 0.981931
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.714427,
+                      "1": 0.247955,
+                      "2": 0.030727,
+                      "3": 0.006891
+                    },
+                    "pick": "0",
+                    "confidence": 0.714427
+                  }
+                },
+                "latencyMs": 4033,
+                "usage": {
+                  "inputTokens": 253,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -1841,6 +2669,42 @@
                 },
                 "costUsd": 0.00016334999999999999,
                 "reason": "The request asks for a new keyboard shortcut, which is a non-urgent feature enhancement."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "docs": 0.003756996243003757,
+                      "question": 0.008823991176008825,
+                      "feature": 0.9850780149219852,
+                      "bug": 0.0023409976590023415
+                    },
+                    "pick": "feature",
+                    "confidence": 0.9850780149219852
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.714427,
+                      "1": 0.247955,
+                      "2": 0.030727,
+                      "3": 0.006891
+                    },
+                    "pick": "0",
+                    "confidence": 0.714427
+                  }
+                },
+                "latencyMs": 4037,
+                "usage": {
+                  "inputTokens": 253,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           }
@@ -1920,6 +2784,42 @@
                 "costUsd": 0.0002337,
                 "reason": "Production logins returning 500 since a deploy indicates a live outage, so it is a bug requiring emergency action."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "bug": 0.9967070000000001,
+                      "feature": 0.00032300000000000004,
+                      "question": 0.0024890000000000003,
+                      "docs": 0.00048100000000000004
+                    },
+                    "pick": "bug",
+                    "confidence": 0.9967070000000001
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.0013179986820013177,
+                      "1": 0.0025669974330025666,
+                      "2": 0.2107097892902107,
+                      "3": 0.7854052145947853
+                    },
+                    "pick": "3",
+                    "confidence": 0.7854052145947853
+                  }
+                },
+                "latencyMs": 4371,
+                "usage": {
+                  "inputTokens": 269,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -1994,6 +2894,42 @@
                 },
                 "costUsd": 0.00014309999999999998,
                 "reason": "Production logins are broken for everyone after a deploy, indicating an active outage that needs emergency attention."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "docs": 0.0013129986870013127,
+                      "question": 0.0014109985890014107,
+                      "feature": 0.0005419994580005418,
+                      "bug": 0.9967340032659966
+                    },
+                    "pick": "bug",
+                    "confidence": 0.9967340032659966
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.0013179986820013177,
+                      "1": 0.0025669974330025666,
+                      "2": 0.2107097892902107,
+                      "3": 0.7854052145947853
+                    },
+                    "pick": "3",
+                    "confidence": 0.7854052145947853
+                  }
+                },
+                "latencyMs": 4172,
+                "usage": {
+                  "inputTokens": 269,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           }
@@ -2073,6 +3009,42 @@
                 "costUsd": 0.00021284999999999997,
                 "reason": "The author is asking for help configuring CI caching, and the issue slows PRs but does not indicate an outage or broken functionality."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "bug": 0.03654,
+                      "feature": 0.003015,
+                      "question": 0.955735,
+                      "docs": 0.00471
+                    },
+                    "pick": "question",
+                    "confidence": 0.955735
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.09306609306609306,
+                      "1": 0.39897439897439896,
+                      "2": 0.49506349506349506,
+                      "3": 0.012896012896012896
+                    },
+                    "pick": "2",
+                    "confidence": 0.49506349506349506
+                  }
+                },
+                "latencyMs": 4476,
+                "usage": {
+                  "inputTokens": 270,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -2147,6 +3119,42 @@
                 },
                 "costUsd": 0.00025245,
                 "reason": "The author is asking for help configuring CI caching, not reporting a definite defect, and the impact is team productivity rather than an outage."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "docs": 0.009758,
+                      "question": 0.932399,
+                      "feature": 0.004491,
+                      "bug": 0.053352
+                    },
+                    "pick": "question",
+                    "confidence": 0.932399
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.09306609306609306,
+                      "1": 0.39897439897439896,
+                      "2": 0.49506349506349506,
+                      "3": 0.012896012896012896
+                    },
+                    "pick": "2",
+                    "confidence": 0.49506349506349506
+                  }
+                },
+                "latencyMs": 5589,
+                "usage": {
+                  "inputTokens": 270,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           }
@@ -2226,6 +3234,42 @@
                 "costUsd": 0.00018839999999999997,
                 "reason": "The issue is an outdated documentation screenshot, and the tutorial steps still work, so it can wait."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "bug": 0.059448,
+                      "feature": 0.000797,
+                      "question": 0.003923,
+                      "docs": 0.935832
+                    },
+                    "pick": "docs",
+                    "confidence": 0.935832
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.49418600000000007,
+                      "1": 0.45508800000000005,
+                      "2": 0.045681000000000006,
+                      "3": 0.005045000000000001
+                    },
+                    "pick": "0",
+                    "confidence": 0.49418600000000007
+                  }
+                },
+                "latencyMs": 4234,
+                "usage": {
+                  "inputTokens": 253,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -2300,6 +3344,42 @@
                 },
                 "costUsd": 0.0001914,
                 "reason": "The issue is an outdated documentation screenshot, not broken functionality, so it can wait for a future release."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "docs": 0.9724509724509725,
+                      "question": 0.002298002298002298,
+                      "feature": 0.000511000511000511,
+                      "bug": 0.02474002474002474
+                    },
+                    "pick": "docs",
+                    "confidence": 0.9724509724509725
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.49418600000000007,
+                      "1": 0.45508800000000005,
+                      "2": 0.045681000000000006,
+                      "3": 0.005045000000000001
+                    },
+                    "pick": "0",
+                    "confidence": 0.49418600000000007
+                  }
+                },
+                "latencyMs": 4449,
+                "usage": {
+                  "inputTokens": 253,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           }
@@ -2379,6 +3459,42 @@
                 "costUsd": 0.00027644999999999997,
                 "reason": "This is a productivity feature request with a workaround, so it is not an emergency but warrants prioritization."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "bug": 0.007753,
+                      "feature": 0.988688,
+                      "question": 0.00301,
+                      "docs": 0.000549
+                    },
+                    "pick": "feature",
+                    "confidence": 0.988688
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.048253,
+                      "1": 0.507414,
+                      "2": 0.434235,
+                      "3": 0.010098
+                    },
+                    "pick": "1",
+                    "confidence": 0.507414
+                  }
+                },
+                "latencyMs": 4736,
+                "usage": {
+                  "inputTokens": 261,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -2454,6 +3570,42 @@
                 "costUsd": 0.00023505,
                 "reason": "The request asks for a new multi-account switching capability, with significant workflow pain but no outage, data loss, or complete blocker."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "label": {
+                    "type": "choice",
+                    "probabilities": {
+                      "docs": 0.000941,
+                      "question": 0.003497,
+                      "feature": 0.987688,
+                      "bug": 0.007874
+                    },
+                    "pick": "feature",
+                    "confidence": 0.987688
+                  },
+                  "urgency": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.048253,
+                      "1": 0.507414,
+                      "2": 0.434235,
+                      "3": 0.010098
+                    },
+                    "pick": "1",
+                    "confidence": 0.507414
+                  }
+                },
+                "latencyMs": 4621,
+                "usage": {
+                  "inputTokens": 261,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           }
         }
@@ -2461,7 +3613,7 @@
     },
     "pr-gate": {
       "useCaseId": "pr-gate",
-      "finishedAt": "2026-11-03T10:59:34.401Z",
+      "finishedAt": "2026-11-04T17:23:21.433Z",
       "challenger": {
         "provider": "opencode-go",
         "model": "deepseek-v4.1-flash"
@@ -2536,6 +3688,39 @@
                 "costUsd": 0.00015209999999999998,
                 "reason": "This is a documentation-only typo fix with no behavioral impact and is trivially revertible."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "needs_review": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.074982,
+                      "no": 0.925018
+                    },
+                    "pick": "no",
+                    "confidence": 0.925018
+                  },
+                  "risk": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.996374,
+                      "1": 0.003169,
+                      "2": 0.000457
+                    },
+                    "pick": "0",
+                    "confidence": 0.996374
+                  }
+                },
+                "latencyMs": 6027,
+                "usage": {
+                  "inputTokens": 229,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {}
@@ -2608,6 +3793,39 @@
                 },
                 "costUsd": 0.0005424,
                 "reason": "DevDependency bump with green CI and no lint changes is low risk and doesn't need senior review."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "needs_review": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.277797,
+                      "no": 0.7222029999999999
+                    },
+                    "pick": "no",
+                    "confidence": 0.7222029999999999
+                  },
+                  "risk": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.862818,
+                      "1": 0.128003,
+                      "2": 0.009179
+                    },
+                    "pick": "0",
+                    "confidence": 0.862818
+                  }
+                },
+                "latencyMs": 7503,
+                "usage": {
+                  "inputTokens": 252,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           },
@@ -2682,6 +3900,39 @@
                 "costUsd": 0.00016395,
                 "reason": "Lowering bcrypt cost in login auth weakens password security and should be reviewed before merging."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "needs_review": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.965527,
+                      "no": 0.034472999999999976
+                    },
+                    "pick": "yes",
+                    "confidence": 0.965527
+                  },
+                  "risk": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.020028,
+                      "1": 0.049935,
+                      "2": 0.930037
+                    },
+                    "pick": "2",
+                    "confidence": 0.930037
+                  }
+                },
+                "latencyMs": 3968,
+                "usage": {
+                  "inputTokens": 244,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {}
@@ -2754,6 +4005,39 @@
                 },
                 "costUsd": 0.00017790000000000001,
                 "reason": "Dropping a user-data column is a destructive, hard-to-reverse schema change, so senior review is warranted and the risk is high."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "needs_review": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.725768,
+                      "no": 0.27423200000000003
+                    },
+                    "pick": "yes",
+                    "confidence": 0.725768
+                  },
+                  "risk": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.38908738908738905,
+                      "1": 0.1906251906251906,
+                      "2": 0.4202874202874203
+                    },
+                    "pick": "2",
+                    "confidence": 0.4202874202874203
+                  }
+                },
+                "latencyMs": 3930,
+                "usage": {
+                  "inputTokens": 235,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           },
@@ -2828,6 +4112,39 @@
                 "costUsd": 0.0001539,
                 "reason": "This is a trivial local variable rename in a test file with no behavioral impact."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "needs_review": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.045395,
+                      "no": 0.954605
+                    },
+                    "pick": "no",
+                    "confidence": 0.954605
+                  },
+                  "risk": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.969485,
+                      "1": 0.029001,
+                      "2": 0.001514
+                    },
+                    "pick": "0",
+                    "confidence": 0.969485
+                  }
+                },
+                "latencyMs": 3849,
+                "usage": {
+                  "inputTokens": 225,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {}
@@ -2900,6 +4217,39 @@
                 },
                 "costUsd": 0.0001617,
                 "reason": "This is a purely cosmetic CSS padding tweak on a button, isolated and easy to revert, so senior review is not needed and risk is low."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "needs_review": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.176697,
+                      "no": 0.823303
+                    },
+                    "pick": "no",
+                    "confidence": 0.823303
+                  },
+                  "risk": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.963027963027963,
+                      "1": 0.03523003523003523,
+                      "2": 0.0017420017420017421
+                    },
+                    "pick": "0",
+                    "confidence": 0.963027963027963
+                  }
+                },
+                "latencyMs": 6671,
+                "usage": {
+                  "inputTokens": 232,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           },
@@ -2974,6 +4324,39 @@
                 "costUsd": 0.0003729,
                 "reason": "Retrying payment capture without an idempotency key in a money-handling path warrants senior review and is high-risk if flawed."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "needs_review": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.924155,
+                      "no": 0.07584500000000005
+                    },
+                    "pick": "yes",
+                    "confidence": 0.924155
+                  },
+                  "risk": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.022477,
+                      "1": 0.058759,
+                      "2": 0.918764
+                    },
+                    "pick": "2",
+                    "confidence": 0.918764
+                  }
+                },
+                "latencyMs": 7531,
+                "usage": {
+                  "inputTokens": 267,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {}
@@ -3046,6 +4429,39 @@
                 },
                 "costUsd": 0.00017565000000000001,
                 "reason": "The new user-listing endpoint omits the requireAdmin middleware used by other routes, exposing user data and needing senior review."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "needs_review": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.863789,
+                      "no": 0.13621099999999997
+                    },
+                    "pick": "yes",
+                    "confidence": 0.863789
+                  },
+                  "risk": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.06653393346606654,
+                      "1": 0.08665591334408666,
+                      "2": 0.8468101531898469
+                    },
+                    "pick": "2",
+                    "confidence": 0.8468101531898469
+                  }
+                },
+                "latencyMs": 7125,
+                "usage": {
+                  "inputTokens": 249,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           },
@@ -3120,6 +4536,39 @@
                 "costUsd": 0.00016769999999999998,
                 "reason": "Logging the raw request object ships webhook payloads, headers, tokens and PII to a shared Datadog account, so a senior review and high-risk classification are warranted."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "needs_review": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.628793,
+                      "no": 0.37120699999999995
+                    },
+                    "pick": "yes",
+                    "confidence": 0.628793
+                  },
+                  "risk": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.6983863016136984,
+                      "1": 0.21581978418021586,
+                      "2": 0.0857939142060858
+                    },
+                    "pick": "0",
+                    "confidence": 0.6983863016136984
+                  }
+                },
+                "latencyMs": 7260,
+                "usage": {
+                  "inputTokens": 227,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {}
@@ -3192,6 +4641,39 @@
                 },
                 "costUsd": 0.00025485,
                 "reason": "A widely used date-formatting utility with locale/time-zone behavior changes merits senior review and carries medium-to-high blast radius if subtly incorrect."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "needs_review": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.948779,
+                      "no": 0.05122099999999996
+                    },
+                    "pick": "yes",
+                    "confidence": 0.948779
+                  },
+                  "risk": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.067456,
+                      "1": 0.548761,
+                      "2": 0.383783
+                    },
+                    "pick": "1",
+                    "confidence": 0.548761
+                  }
+                },
+                "latencyMs": 4030,
+                "usage": {
+                  "inputTokens": 238,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           },
@@ -3266,6 +4748,39 @@
                 "costUsd": 0.00025005,
                 "reason": "Changing an API default page size alters response size and load, so it warrants review though it is scoped to one endpoint."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "needs_review": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.875616,
+                      "no": 0.12438400000000005
+                    },
+                    "pick": "yes",
+                    "confidence": 0.875616
+                  },
+                  "risk": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.256884,
+                      "1": 0.658965,
+                      "2": 0.084151
+                    },
+                    "pick": "1",
+                    "confidence": 0.658965
+                  }
+                },
+                "latencyMs": 5683,
+                "usage": {
+                  "inputTokens": 233,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {}
@@ -3338,6 +4853,39 @@
                 },
                 "costUsd": 0.00019484999999999997,
                 "reason": "Broadening deploy triggers from main-only to every push can deploy unreviewed branch code, so it warrants senior review and is high risk."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "needs_review": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.899537,
+                      "no": 0.10046299999999997
+                    },
+                    "pick": "yes",
+                    "confidence": 0.899537
+                  },
+                  "risk": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.202421,
+                      "1": 0.646733,
+                      "2": 0.150846
+                    },
+                    "pick": "1",
+                    "confidence": 0.646733
+                  }
+                },
+                "latencyMs": 6609,
+                "usage": {
+                  "inputTokens": 241,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           },
@@ -3412,6 +4960,39 @@
                 "costUsd": 0.00020265,
                 "reason": "Tests-only PR changes no runtime behavior, so risk is low, though a quick review of test correctness is still typically warranted."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "needs_review": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.35298,
+                      "no": 0.6470199999999999
+                    },
+                    "pick": "no",
+                    "confidence": 0.6470199999999999
+                  },
+                  "risk": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.9187780812219186,
+                      "1": 0.05833094166905833,
+                      "2": 0.022890977109022888
+                    },
+                    "pick": "0",
+                    "confidence": 0.9187780812219186
+                  }
+                },
+                "latencyMs": 5798,
+                "usage": {
+                  "inputTokens": 223,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {}
@@ -3484,6 +5065,39 @@
                 },
                 "costUsd": 0.00036975,
                 "reason": "The new checkout component is dormant behind a flag that is off everywhere, so risk is low, but checkout-related code still merits senior review before merge."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "needs_review": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.293001,
+                      "no": 0.7069989999999999
+                    },
+                    "pick": "no",
+                    "confidence": 0.7069989999999999
+                  },
+                  "risk": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.8637808637808638,
+                      "1": 0.08171908171908172,
+                      "2": 0.054500054500054504
+                    },
+                    "pick": "0",
+                    "confidence": 0.8637808637808638
+                  }
+                },
+                "latencyMs": 4177,
+                "usage": {
+                  "inputTokens": 234,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           },
@@ -3558,6 +5172,39 @@
                 "costUsd": 0.0001881,
                 "reason": "Extending price cache TTL to 24 hours risks showing stale monetary prices, so senior review and high risk are warranted."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "needs_review": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.928339,
+                      "no": 0.07166099999999997
+                    },
+                    "pick": "yes",
+                    "confidence": 0.928339
+                  },
+                  "risk": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.097171,
+                      "1": 0.361254,
+                      "2": 0.541575
+                    },
+                    "pick": "2",
+                    "confidence": 0.541575
+                  }
+                },
+                "latencyMs": 3999,
+                "usage": {
+                  "inputTokens": 244,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {}
@@ -3631,6 +5278,39 @@
                 "costUsd": 0.00015825,
                 "reason": "This is a trivial cosmetic copyright-year update with negligible behavioral risk and easy revert."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "needs_review": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.156808,
+                      "no": 0.8431919999999999
+                    },
+                    "pick": "no",
+                    "confidence": 0.8431919999999999
+                  },
+                  "risk": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.981943,
+                      "1": 0.016302,
+                      "2": 0.001755
+                    },
+                    "pick": "0",
+                    "confidence": 0.981943
+                  }
+                },
+                "latencyMs": 6058,
+                "usage": {
+                  "inputTokens": 222,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {}
@@ -3639,7 +5319,7 @@
     },
     "scam-check": {
       "useCaseId": "scam-check",
-      "finishedAt": "2026-11-03T10:59:56.504Z",
+      "finishedAt": "2026-11-04T17:26:17.081Z",
       "challenger": {
         "provider": "opencode-go",
         "model": "deepseek-v4.1-flash"
@@ -3716,6 +5396,40 @@
                 "costUsd": 0.00021315,
                 "reason": "Fake DHL domain, urgent customs fee, and a link to pay are classic phishing/payment-pressure scam indicators."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.987315,
+                      "no": 0.012684999999999946
+                    },
+                    "pick": "yes",
+                    "confidence": 0.987315
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "legit": 0.011831,
+                      "phishing_link": 0.73863,
+                      "payment_pressure": 0.244473,
+                      "prize": 0.005066
+                    },
+                    "pick": "phishing_link",
+                    "confidence": 0.73863
+                  }
+                },
+                "latencyMs": 7123,
+                "usage": {
+                  "inputTokens": 260,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -3786,6 +5500,40 @@
                 },
                 "costUsd": 0.00034934999999999995,
                 "reason": "Urgent DHL customs fee with a suspicious .top payment link is a classic smishing scam."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.987315,
+                      "no": 0.012684999999999946
+                    },
+                    "pick": "yes",
+                    "confidence": 0.987315
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "prize": 0.005095994904005096,
+                      "payment_pressure": 0.17402182597817403,
+                      "phishing_link": 0.8141511858488142,
+                      "legit": 0.006730993269006731
+                    },
+                    "pick": "phishing_link",
+                    "confidence": 0.8141511858488142
+                  }
+                },
+                "latencyMs": 4847,
+                "usage": {
+                  "inputTokens": 260,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           }
@@ -3861,6 +5609,40 @@
                 "costUsd": 0.00017595,
                 "reason": "Classic impersonation scam using a new-number story to pressure an urgent payment."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.937536,
+                      "no": 0.062463999999999964
+                    },
+                    "pick": "yes",
+                    "confidence": 0.937536
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "legit": 0.019744,
+                      "phishing_link": 0.000776,
+                      "payment_pressure": 0.978956,
+                      "prize": 0.000524
+                    },
+                    "pick": "payment_pressure",
+                    "confidence": 0.978956
+                  }
+                },
+                "latencyMs": 4979,
+                "usage": {
+                  "inputTokens": 247,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -3931,6 +5713,40 @@
                 },
                 "costUsd": 0.00013514999999999998,
                 "reason": "Classic 'Hi Mum' impersonation scam using a new-number excuse to urgently request money."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.937536,
+                      "no": 0.062463999999999964
+                    },
+                    "pick": "yes",
+                    "confidence": 0.937536
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "prize": 0.003639,
+                      "payment_pressure": 0.962511,
+                      "phishing_link": 0.002889,
+                      "legit": 0.030961
+                    },
+                    "pick": "payment_pressure",
+                    "confidence": 0.962511
+                  }
+                },
+                "latencyMs": 4631,
+                "usage": {
+                  "inputTokens": 247,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           }
@@ -4006,6 +5822,40 @@
                 "costUsd": 0.0001593,
                 "reason": "It is a standard Uber verification code with no link, payment request, or prize claim."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.692275,
+                      "no": 0.307725
+                    },
+                    "pick": "yes",
+                    "confidence": 0.692275
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "legit": 0.900127,
+                      "phishing_link": 0.088278,
+                      "payment_pressure": 0.005927,
+                      "prize": 0.005668
+                    },
+                    "pick": "legit",
+                    "confidence": 0.900127
+                  }
+                },
+                "latencyMs": 4670,
+                "usage": {
+                  "inputTokens": 227,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -4076,6 +5926,40 @@
                 },
                 "costUsd": 0.0001689,
                 "reason": "It is a standard Uber verification code with no link or payment request, though unsolicited codes can indicate someone else initiated a login."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.692275,
+                      "no": 0.307725
+                    },
+                    "pick": "yes",
+                    "confidence": 0.692275
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "prize": 0.005284,
+                      "payment_pressure": 0.006602,
+                      "phishing_link": 0.122567,
+                      "legit": 0.865547
+                    },
+                    "pick": "legit",
+                    "confidence": 0.865547
+                  }
+                },
+                "latencyMs": 4926,
+                "usage": {
+                  "inputTokens": 227,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           }
@@ -4151,6 +6035,40 @@
                 "costUsd": 0.00021344999999999998,
                 "reason": "Unsolicited gift-card prize claim with a suspicious short link and urgency is a classic scam."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.993112,
+                      "no": 0.006888000000000005
+                    },
+                    "pick": "yes",
+                    "confidence": 0.993112
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "legit": 0.001964,
+                      "phishing_link": 0.109837,
+                      "payment_pressure": 0.001034,
+                      "prize": 0.887165
+                    },
+                    "pick": "prize",
+                    "confidence": 0.887165
+                  }
+                },
+                "latencyMs": 8404,
+                "usage": {
+                  "inputTokens": 236,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -4221,6 +6139,40 @@
                 },
                 "costUsd": 0.00017565,
                 "reason": "It falsely claims a Walmart gift-card prize and uses an urgent suspicious link, indicating a scam."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.993112,
+                      "no": 0.006888000000000005
+                    },
+                    "pick": "yes",
+                    "confidence": 0.993112
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "prize": 0.7402960000000001,
+                      "payment_pressure": 0.0034630000000000004,
+                      "phishing_link": 0.25439600000000007,
+                      "legit": 0.0018450000000000003
+                    },
+                    "pick": "prize",
+                    "confidence": 0.7402960000000001
+                  }
+                },
+                "latencyMs": 4559,
+                "usage": {
+                  "inputTokens": 236,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           }
@@ -4296,6 +6248,40 @@
                 "costUsd": 0.00015869999999999998,
                 "reason": "A plain appointment reminder with no link, payment request, or prize claim is most likely legitimate."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.143541,
+                      "no": 0.856459
+                    },
+                    "pick": "no",
+                    "confidence": 0.856459
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "legit": 0.9900450000000001,
+                      "phishing_link": 0.006662000000000001,
+                      "payment_pressure": 0.0024540000000000005,
+                      "prize": 0.0008390000000000001
+                    },
+                    "pick": "legit",
+                    "confidence": 0.9900450000000001
+                  }
+                },
+                "latencyMs": 5742,
+                "usage": {
+                  "inputTokens": 230,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -4366,6 +6352,40 @@
                 },
                 "costUsd": 0.0001671,
                 "reason": "A plain appointment reminder from a named clinic with a cancel-by-reply instruction and no link or payment request is most likely legitimate."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.143541,
+                      "no": 0.856459
+                    },
+                    "pick": "no",
+                    "confidence": 0.856459
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "prize": 0.00381,
+                      "payment_pressure": 0.004085,
+                      "phishing_link": 0.029561,
+                      "legit": 0.962544
+                    },
+                    "pick": "legit",
+                    "confidence": 0.962544
+                  }
+                },
+                "latencyMs": 5525,
+                "usage": {
+                  "inputTokens": 230,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           }
@@ -4441,6 +6461,40 @@
                 "costUsd": 0.00017759999999999995,
                 "reason": "The lookalike domain, urgent suspension threat, and 'Update now' link are classic phishing indicators."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.983651,
+                      "no": 0.016348999999999947
+                    },
+                    "pick": "yes",
+                    "confidence": 0.983651
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "legit": 0.014807,
+                      "phishing_link": 0.887078,
+                      "payment_pressure": 0.096553,
+                      "prize": 0.001562
+                    },
+                    "pick": "phishing_link",
+                    "confidence": 0.887078
+                  }
+                },
+                "latencyMs": 4566,
+                "usage": {
+                  "inputTokens": 242,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -4511,6 +6565,40 @@
                 },
                 "costUsd": 0.0001686,
                 "reason": "The lookalike Netflix domain, urgent 24-hour suspension threat, and billing-details link are classic phishing indicators."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.983651,
+                      "no": 0.016348999999999947
+                    },
+                    "pick": "yes",
+                    "confidence": 0.983651
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "prize": 0.001205,
+                      "payment_pressure": 0.041041,
+                      "phishing_link": 0.952162,
+                      "legit": 0.005592
+                    },
+                    "pick": "phishing_link",
+                    "confidence": 0.952162
+                  }
+                },
+                "latencyMs": 5424,
+                "usage": {
+                  "inputTokens": 242,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           }
@@ -4586,6 +6674,40 @@
                 "costUsd": 0.00016680000000000002,
                 "reason": "It impersonates the IRS and demands urgent payment via gift cards, a classic scam tactic."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.998877,
+                      "no": 0.0011229999999999851
+                    },
+                    "pick": "yes",
+                    "confidence": 0.998877
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "legit": 0.0016439983560016442,
+                      "phishing_link": 0.0032159967840032166,
+                      "payment_pressure": 0.9949450050549951,
+                      "prize": 0.000194999805000195
+                    },
+                    "pick": "payment_pressure",
+                    "confidence": 0.9949450050549951
+                  }
+                },
+                "latencyMs": 6461,
+                "usage": {
+                  "inputTokens": 241,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -4656,6 +6778,40 @@
                 },
                 "costUsd": 0.000123,
                 "reason": "It impersonates the IRS and demands urgent payment via gift cards, a classic scam tactic."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.998877,
+                      "no": 0.0011229999999999851
+                    },
+                    "pick": "yes",
+                    "confidence": 0.998877
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "prize": 0.000919,
+                      "payment_pressure": 0.994071,
+                      "phishing_link": 0.003808,
+                      "legit": 0.001202
+                    },
+                    "pick": "payment_pressure",
+                    "confidence": 0.994071
+                  }
+                },
+                "latencyMs": 5851,
+                "usage": {
+                  "inputTokens": 241,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           }
@@ -4731,6 +6887,40 @@
                 "costUsd": 0.00026535,
                 "reason": "The message is a typical order-shipped notification with no suspicious link or payment/prize pressure, though sender spoofing is possible."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.101664,
+                      "no": 0.898336
+                    },
+                    "pick": "no",
+                    "confidence": 0.898336
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "legit": 0.956027,
+                      "phishing_link": 0.038474,
+                      "payment_pressure": 0.003877,
+                      "prize": 0.001622
+                    },
+                    "pick": "legit",
+                    "confidence": 0.956027
+                  }
+                },
+                "latencyMs": 6877,
+                "usage": {
+                  "inputTokens": 251,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -4801,6 +6991,40 @@
                 },
                 "costUsd": 0.00024074999999999997,
                 "reason": "It is a routine Amazon shipment notification with no payment request or obvious credential-stealing link, though sender spoofing is always possible."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.101664,
+                      "no": 0.898336
+                    },
+                    "pick": "no",
+                    "confidence": 0.898336
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "prize": 0.0018759981240018763,
+                      "payment_pressure": 0.0022919977080022923,
+                      "phishing_link": 0.04207795792204208,
+                      "legit": 0.9537540462459538
+                    },
+                    "pick": "legit",
+                    "confidence": 0.9537540462459538
+                  }
+                },
+                "latencyMs": 4507,
+                "usage": {
+                  "inputTokens": 251,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           }
@@ -4876,6 +7100,40 @@
                 "costUsd": 0.00019814999999999996,
                 "reason": "Impersonates HMRC with a fake refund link designed to steal personal or login details."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.959406,
+                      "no": 0.04059400000000002
+                    },
+                    "pick": "yes",
+                    "confidence": 0.959406
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "legit": 0.03081696918303082,
+                      "phishing_link": 0.5203804796195204,
+                      "payment_pressure": 0.0020779979220020782,
+                      "prize": 0.44672455327544675
+                    },
+                    "pick": "phishing_link",
+                    "confidence": 0.5203804796195204
+                  }
+                },
+                "latencyMs": 6381,
+                "usage": {
+                  "inputTokens": 240,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -4946,6 +7204,40 @@
                 },
                 "costUsd": 0.00022815,
                 "reason": "Fake HMRC refund link uses a deceptive domain to lure the recipient into clicking."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.959406,
+                      "no": 0.04059400000000002
+                    },
+                    "pick": "yes",
+                    "confidence": 0.959406
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "prize": 0.437987,
+                      "payment_pressure": 0.003286,
+                      "phishing_link": 0.542894,
+                      "legit": 0.015833
+                    },
+                    "pick": "phishing_link",
+                    "confidence": 0.542894
+                  }
+                },
+                "latencyMs": 6320,
+                "usage": {
+                  "inputTokens": 240,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           }
@@ -5021,6 +7313,40 @@
                 "costUsd": 0.00013245,
                 "reason": "The message is a casual plan with a saved contact and contains no link, payment request, or prize claim."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.007971,
+                      "no": 0.992029
+                    },
+                    "pick": "no",
+                    "confidence": 0.992029
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "legit": 0.999287,
+                      "phishing_link": 0.00052,
+                      "payment_pressure": 0.000129,
+                      "prize": 0.000064
+                    },
+                    "pick": "legit",
+                    "confidence": 0.999287
+                  }
+                },
+                "latencyMs": 4400,
+                "usage": {
+                  "inputTokens": 230,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -5091,6 +7417,40 @@
                 },
                 "costUsd": 0.00014865,
                 "reason": "Casual message from a saved contact about existing plans, with no links, payment requests, or prize claims."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.007971,
+                      "no": 0.992029
+                    },
+                    "pick": "no",
+                    "confidence": 0.992029
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "prize": 0.00018900018900018902,
+                      "payment_pressure": 0.00013300013300013302,
+                      "phishing_link": 0.000804000804000804,
+                      "legit": 0.9988739988739989
+                    },
+                    "pick": "legit",
+                    "confidence": 0.9988739988739989
+                  }
+                },
+                "latencyMs": 4599,
+                "usage": {
+                  "inputTokens": 230,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           }
@@ -5166,6 +7526,40 @@
                 "costUsd": 0.0001461,
                 "reason": "The email uses a lookalike domain, urgent mailbox-full warning, and a password revalidation link, which are classic phishing indicators."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.948792,
+                      "no": 0.05120800000000003
+                    },
+                    "pick": "yes",
+                    "confidence": 0.948792
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "legit": 0.034194,
+                      "phishing_link": 0.963567,
+                      "payment_pressure": 0.001523,
+                      "prize": 0.000716
+                    },
+                    "pick": "phishing_link",
+                    "confidence": 0.963567
+                  }
+                },
+                "latencyMs": 4848,
+                "usage": {
+                  "inputTokens": 246,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -5236,6 +7630,40 @@
                 },
                 "costUsd": 0.00022049999999999997,
                 "reason": "It impersonates IT support, uses a suspicious domain, and pressures the recipient to re-validate credentials via a link."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.948792,
+                      "no": 0.05120800000000003
+                    },
+                    "pick": "yes",
+                    "confidence": 0.948792
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "prize": 0.001221,
+                      "payment_pressure": 0.002114,
+                      "phishing_link": 0.966035,
+                      "legit": 0.03063
+                    },
+                    "pick": "phishing_link",
+                    "confidence": 0.966035
+                  }
+                },
+                "latencyMs": 4632,
+                "usage": {
+                  "inputTokens": 246,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           }
@@ -5311,6 +7739,40 @@
                 "costUsd": 0.000186,
                 "reason": "The message uses a usual bank sender name, includes no link or PIN request, and directs the user to the card's official number."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.082344,
+                      "no": 0.917656
+                    },
+                    "pick": "no",
+                    "confidence": 0.917656
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "legit": 0.9379330000000001,
+                      "phishing_link": 0.05837900000000001,
+                      "payment_pressure": 0.0023420000000000003,
+                      "prize": 0.0013460000000000002
+                    },
+                    "pick": "legit",
+                    "confidence": 0.9379330000000001
+                  }
+                },
+                "latencyMs": 5468,
+                "usage": {
+                  "inputTokens": 249,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -5381,6 +7843,40 @@
                 },
                 "costUsd": 0.00019079999999999998,
                 "reason": "The message uses a standard bank security alert format, provides no link, and tells the recipient to call the official number on their card."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.082344,
+                      "no": 0.917656
+                    },
+                    "pick": "no",
+                    "confidence": 0.917656
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "prize": 0.003393,
+                      "payment_pressure": 0.004144,
+                      "phishing_link": 0.081612,
+                      "legit": 0.910851
+                    },
+                    "pick": "legit",
+                    "confidence": 0.910851
+                  }
+                },
+                "latencyMs": 5008,
+                "usage": {
+                  "inputTokens": 249,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           }
@@ -5456,6 +7952,40 @@
                 "costUsd": 0.00014084999999999998,
                 "reason": "Guaranteed high weekly returns plus an upfront USDT payment request are classic investment scam pressure tactics."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.996939,
+                      "no": 0.0030609999999999804
+                    },
+                    "pick": "yes",
+                    "confidence": 0.996939
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "legit": 0.0006179993820006178,
+                      "phishing_link": 0.0012099987900012097,
+                      "payment_pressure": 0.9976380023619975,
+                      "prize": 0.0005339994660005339
+                    },
+                    "pick": "payment_pressure",
+                    "confidence": 0.9976380023619975
+                  }
+                },
+                "latencyMs": 5622,
+                "usage": {
+                  "inputTokens": 252,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -5526,6 +8056,40 @@
                 },
                 "costUsd": 0.00015345,
                 "reason": "Guaranteed high returns plus an urgent request to send USDT is a classic investment scam and payment pressure tactic."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.996939,
+                      "no": 0.0030609999999999804
+                    },
+                    "pick": "yes",
+                    "confidence": 0.996939
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "prize": 0.003399,
+                      "payment_pressure": 0.994144,
+                      "phishing_link": 0.002011,
+                      "legit": 0.000446
+                    },
+                    "pick": "payment_pressure",
+                    "confidence": 0.994144
+                  }
+                },
+                "latencyMs": 5499,
+                "usage": {
+                  "inputTokens": 252,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           }
@@ -5601,6 +8165,40 @@
                 "costUsd": 0.0002013,
                 "reason": "Unsolicited lottery-win claim requesting personal and bank details is a classic prize scam."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.994826,
+                      "no": 0.005174000000000012
+                    },
+                    "pick": "yes",
+                    "confidence": 0.994826
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "legit": 0.000391,
+                      "phishing_link": 0.000838,
+                      "payment_pressure": 0.000482,
+                      "prize": 0.998289
+                    },
+                    "pick": "prize",
+                    "confidence": 0.998289
+                  }
+                },
+                "latencyMs": 6519,
+                "usage": {
+                  "inputTokens": 244,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -5671,6 +8269,40 @@
                 },
                 "costUsd": 0.0001461,
                 "reason": "It claims a large lottery win and requests personal and bank details, a classic advance-fee scam."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.994826,
+                      "no": 0.005174000000000012
+                    },
+                    "pick": "yes",
+                    "confidence": 0.994826
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "prize": 0.998512,
+                      "payment_pressure": 0.000295,
+                      "phishing_link": 0.001055,
+                      "legit": 0.000138
+                    },
+                    "pick": "prize",
+                    "confidence": 0.998512
+                  }
+                },
+                "latencyMs": 4606,
+                "usage": {
+                  "inputTokens": 244,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           }
@@ -5746,6 +8378,40 @@
                 "costUsd": 0.000159,
                 "reason": "Routine Spotify renewal notice from a no-reply address with no suspicious link or payment demand."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.059236,
+                      "no": 0.940764
+                    },
+                    "pick": "no",
+                    "confidence": 0.940764
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "legit": 0.977577,
+                      "phishing_link": 0.008932,
+                      "payment_pressure": 0.012987,
+                      "prize": 0.000504
+                    },
+                    "pick": "legit",
+                    "confidence": 0.977577
+                  }
+                },
+                "latencyMs": 5050,
+                "usage": {
+                  "inputTokens": 239,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -5816,6 +8482,40 @@
                 },
                 "costUsd": 0.00016079999999999998,
                 "reason": "It is a routine Spotify renewal notice with no links or urgent payment requests, so it appears legitimate."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.059236,
+                      "no": 0.940764
+                    },
+                    "pick": "no",
+                    "confidence": 0.940764
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "prize": 0.001034,
+                      "payment_pressure": 0.011441,
+                      "phishing_link": 0.021649,
+                      "legit": 0.965876
+                    },
+                    "pick": "legit",
+                    "confidence": 0.965876
+                  }
+                },
+                "latencyMs": 4625,
+                "usage": {
+                  "inputTokens": 239,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           }
@@ -5891,6 +8591,40 @@
                 "costUsd": 0.0001593,
                 "reason": "Urgent account-deletion threat with a suspicious verification link is a classic phishing attempt."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.976527,
+                      "no": 0.023472999999999966
+                    },
+                    "pick": "yes",
+                    "confidence": 0.976527
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "legit": 0.016457000000000003,
+                      "phishing_link": 0.9801190000000001,
+                      "payment_pressure": 0.0028120000000000003,
+                      "prize": 0.0006120000000000001
+                    },
+                    "pick": "phishing_link",
+                    "confidence": 0.9801190000000001
+                  }
+                },
+                "latencyMs": 6821,
+                "usage": {
+                  "inputTokens": 235,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {
@@ -5962,6 +8696,40 @@
                 "costUsd": 0.0001329,
                 "reason": "It impersonates WhatsApp with an urgent account-deletion threat and directs users to a suspicious verification link to steal credentials."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "is_scam": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.976527,
+                      "no": 0.023472999999999966
+                    },
+                    "pick": "yes",
+                    "confidence": 0.976527
+                  },
+                  "kind": {
+                    "type": "choice",
+                    "probabilities": {
+                      "prize": 0.0011320000000000002,
+                      "payment_pressure": 0.0025070000000000005,
+                      "phishing_link": 0.9864980000000001,
+                      "legit": 0.009863000000000002
+                    },
+                    "pick": "phishing_link",
+                    "confidence": 0.9864980000000001
+                  }
+                },
+                "latencyMs": 5374,
+                "usage": {
+                  "inputTokens": 235,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           }
         }
@@ -5969,7 +8737,7 @@
     },
     "screenshot-judge": {
       "useCaseId": "screenshot-judge",
-      "finishedAt": "2026-11-03T10:59:58.086Z",
+      "finishedAt": "2026-11-04T17:26:17.086Z",
       "challenger": {
         "provider": "opencode-go",
         "model": "deepseek-v4.1-flash"
@@ -6017,6 +8785,11 @@
                 },
                 "costUsd": 0.00001701
               }
+            },
+            "local": {
+              "ok": false,
+              "error": "No image input",
+              "unsupported": true
             }
           },
           "flipped": {
@@ -6059,6 +8832,11 @@
                 },
                 "costUsd": 0.00001701
               }
+            },
+            "local": {
+              "ok": false,
+              "error": "No image input",
+              "unsupported": true
             }
           }
         },
@@ -6104,6 +8882,11 @@
                 },
                 "costUsd": 0.00001701
               }
+            },
+            "local": {
+              "ok": false,
+              "error": "No image input",
+              "unsupported": true
             }
           },
           "flipped": {
@@ -6146,6 +8929,11 @@
                 },
                 "costUsd": 0.00001701
               }
+            },
+            "local": {
+              "ok": false,
+              "error": "No image input",
+              "unsupported": true
             }
           }
         },
@@ -6191,6 +8979,11 @@
                 },
                 "costUsd": 0.00001701
               }
+            },
+            "local": {
+              "ok": false,
+              "error": "No image input",
+              "unsupported": true
             }
           },
           "flipped": {
@@ -6233,6 +9026,11 @@
                 },
                 "costUsd": 0.00001701
               }
+            },
+            "local": {
+              "ok": false,
+              "error": "No image input",
+              "unsupported": true
             }
           }
         },
@@ -6278,6 +9076,11 @@
                 },
                 "costUsd": 0.00001701
               }
+            },
+            "local": {
+              "ok": false,
+              "error": "No image input",
+              "unsupported": true
             }
           },
           "flipped": {
@@ -6320,6 +9123,11 @@
                 },
                 "costUsd": 0.00001701
               }
+            },
+            "local": {
+              "ok": false,
+              "error": "No image input",
+              "unsupported": true
             }
           }
         },
@@ -6365,6 +9173,11 @@
                 },
                 "costUsd": 0.00001701
               }
+            },
+            "local": {
+              "ok": false,
+              "error": "No image input",
+              "unsupported": true
             }
           },
           "flipped": {
@@ -6407,6 +9220,11 @@
                 },
                 "costUsd": 0.00001701
               }
+            },
+            "local": {
+              "ok": false,
+              "error": "No image input",
+              "unsupported": true
             }
           }
         },
@@ -6452,6 +9270,11 @@
                 },
                 "costUsd": 0.00001701
               }
+            },
+            "local": {
+              "ok": false,
+              "error": "No image input",
+              "unsupported": true
             }
           },
           "flipped": {
@@ -6494,6 +9317,11 @@
                 },
                 "costUsd": 0.00001701
               }
+            },
+            "local": {
+              "ok": false,
+              "error": "No image input",
+              "unsupported": true
             }
           }
         },
@@ -6539,6 +9367,11 @@
                 },
                 "costUsd": 0.00001701
               }
+            },
+            "local": {
+              "ok": false,
+              "error": "No image input",
+              "unsupported": true
             }
           },
           "flipped": {
@@ -6581,6 +9414,11 @@
                 },
                 "costUsd": 0.00001701
               }
+            },
+            "local": {
+              "ok": false,
+              "error": "No image input",
+              "unsupported": true
             }
           }
         },
@@ -6626,6 +9464,11 @@
                 },
                 "costUsd": 0.00001701
               }
+            },
+            "local": {
+              "ok": false,
+              "error": "No image input",
+              "unsupported": true
             }
           },
           "flipped": {
@@ -6668,6 +9511,11 @@
                 },
                 "costUsd": 0.00001701
               }
+            },
+            "local": {
+              "ok": false,
+              "error": "No image input",
+              "unsupported": true
             }
           }
         },
@@ -6713,6 +9561,11 @@
                 },
                 "costUsd": 0.00001701
               }
+            },
+            "local": {
+              "ok": false,
+              "error": "No image input",
+              "unsupported": true
             }
           },
           "flipped": {
@@ -6755,6 +9608,11 @@
                 },
                 "costUsd": 0.00001701
               }
+            },
+            "local": {
+              "ok": false,
+              "error": "No image input",
+              "unsupported": true
             }
           }
         },
@@ -6800,6 +9658,11 @@
                 },
                 "costUsd": 0.00001701
               }
+            },
+            "local": {
+              "ok": false,
+              "error": "No image input",
+              "unsupported": true
             }
           },
           "flipped": {
@@ -6842,6 +9705,11 @@
                 },
                 "costUsd": 0.00001701
               }
+            },
+            "local": {
+              "ok": false,
+              "error": "No image input",
+              "unsupported": true
             }
           }
         },
@@ -6887,6 +9755,11 @@
                 },
                 "costUsd": 0.00001701
               }
+            },
+            "local": {
+              "ok": false,
+              "error": "No image input",
+              "unsupported": true
             }
           },
           "flipped": {
@@ -6929,6 +9802,11 @@
                 },
                 "costUsd": 0.00001701
               }
+            },
+            "local": {
+              "ok": false,
+              "error": "No image input",
+              "unsupported": true
             }
           }
         },
@@ -6974,6 +9852,11 @@
                 },
                 "costUsd": 0.00001701
               }
+            },
+            "local": {
+              "ok": false,
+              "error": "No image input",
+              "unsupported": true
             }
           },
           "flipped": {
@@ -7016,6 +9899,11 @@
                 },
                 "costUsd": 0.00001701
               }
+            },
+            "local": {
+              "ok": false,
+              "error": "No image input",
+              "unsupported": true
             }
           }
         }
@@ -7023,7 +9911,7 @@
     },
     "apartment-fit": {
       "useCaseId": "apartment-fit",
-      "finishedAt": "2026-11-03T11:00:13.723Z",
+      "finishedAt": "2026-11-04T17:28:28.904Z",
       "challenger": {
         "provider": "opencode-go",
         "model": "deepseek-v4.1-flash"
@@ -7102,6 +9990,41 @@
                 "costUsd": 0.00014414999999999998,
                 "reason": "The listing satisfies every must-have and all nice-to-haves, so it is an excellent fit with no dealbreaker."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "fit": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.000455,
+                      "1": 0.000639,
+                      "2": 0.002985,
+                      "3": 0.025581,
+                      "4": 0.97034
+                    },
+                    "pick": "4",
+                    "confidence": 0.97034
+                  },
+                  "dealbreaker": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.000747,
+                      "no": 0.999253
+                    },
+                    "pick": "no",
+                    "confidence": 0.999253
+                  }
+                },
+                "latencyMs": 10090,
+                "usage": {
+                  "inputTokens": 315,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {}
@@ -7178,6 +10101,41 @@
                 },
                 "costUsd": 0.00025215000000000003,
                 "reason": "Total monthly cost is about €1,500, exceeding the €1,400 must-have cap, though the other requirements are met."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "fit": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.49942400000000003,
+                      "1": 0.22001600000000002,
+                      "2": 0.07873800000000002,
+                      "3": 0.12323400000000001,
+                      "4": 0.07858800000000002
+                    },
+                    "pick": "0",
+                    "confidence": 0.49942400000000003
+                  },
+                  "dealbreaker": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.954278,
+                      "no": 0.04572200000000004
+                    },
+                    "pick": "yes",
+                    "confidence": 0.954278
+                  }
+                },
+                "latencyMs": 8520,
+                "usage": {
+                  "inputTokens": 314,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           },
@@ -7256,6 +10214,41 @@
                 "costUsd": 0.0001902,
                 "reason": "It meets rent, bedrooms, and commute, but the strict no-pets rule violates the dog requirement."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "fit": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.5424305424305425,
+                      "1": 0.43918643918643924,
+                      "2": 0.009787009787009788,
+                      "3": 0.0067400067400067406,
+                      "4": 0.0018560018560018561
+                    },
+                    "pick": "0",
+                    "confidence": 0.5424305424305425
+                  },
+                  "dealbreaker": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.998916,
+                      "no": 0.0010839999999999739
+                    },
+                    "pick": "yes",
+                    "confidence": 0.998916
+                  }
+                },
+                "latencyMs": 7005,
+                "usage": {
+                  "inputTokens": 310,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {}
@@ -7332,6 +10325,41 @@
                 },
                 "costUsd": 0.00029864999999999997,
                 "reason": "The listing has only 1 bedroom, so it fails the must-have 2-bedroom requirement despite otherwise meeting rent, dog, and commute criteria."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "fit": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.28865428865428866,
+                      "1": 0.5778405778405779,
+                      "2": 0.09886109886109885,
+                      "3": 0.03118203118203118,
+                      "4": 0.0034620034620034615
+                    },
+                    "pick": "1",
+                    "confidence": 0.5778405778405779
+                  },
+                  "dealbreaker": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.990116,
+                      "no": 0.009884000000000004
+                    },
+                    "pick": "yes",
+                    "confidence": 0.990116
+                  }
+                },
+                "latencyMs": 6684,
+                "usage": {
+                  "inputTokens": 313,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           },
@@ -7410,6 +10438,41 @@
                 "costUsd": 0.00026775,
                 "reason": "Rent, dog, bedrooms, and some nice-to-haves fit, but the 40-minute commute breaks the under-35-minute must-have."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "fit": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.074969,
+                      "1": 0.46628,
+                      "2": 0.273263,
+                      "3": 0.165838,
+                      "4": 0.01965
+                    },
+                    "pick": "1",
+                    "confidence": 0.46628
+                  },
+                  "dealbreaker": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.893051,
+                      "no": 0.10694899999999996
+                    },
+                    "pick": "yes",
+                    "confidence": 0.893051
+                  }
+                },
+                "latencyMs": 11272,
+                "usage": {
+                  "inputTokens": 311,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {}
@@ -7486,6 +10549,41 @@
                 },
                 "costUsd": 0.0001899,
                 "reason": "All must-haves are met, but the busy road and walk-up to the 4th floor reduce overall quality."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "fit": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.007906992093007907,
+                      "1": 0.08217991782008217,
+                      "2": 0.4296145703854296,
+                      "3": 0.4665475334524665,
+                      "4": 0.013750986249013749
+                    },
+                    "pick": "3",
+                    "confidence": 0.4665475334524665
+                  },
+                  "dealbreaker": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.000691,
+                      "no": 0.999309
+                    },
+                    "pick": "no",
+                    "confidence": 0.999309
+                  }
+                },
+                "latencyMs": 8580,
+                "usage": {
+                  "inputTokens": 316,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           },
@@ -7564,6 +10662,41 @@
                 "costUsd": 0.00019064999999999997,
                 "reason": "The listing meets every must-have and all nice-to-haves, so it is an excellent fit with no apparent dealbreaker."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "fit": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.000764,
+                      "1": 0.001008,
+                      "2": 0.004108,
+                      "3": 0.034075,
+                      "4": 0.960045
+                    },
+                    "pick": "4",
+                    "confidence": 0.960045
+                  },
+                  "dealbreaker": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.001398,
+                      "no": 0.998602
+                    },
+                    "pick": "no",
+                    "confidence": 0.998602
+                  }
+                },
+                "latencyMs": 7613,
+                "usage": {
+                  "inputTokens": 318,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {}
@@ -7640,6 +10773,41 @@
                 },
                 "costUsd": 0.0002106,
                 "reason": "It meets all must-haves, with elevator as a plus but no balcony and an extra dog deposit."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "fit": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.00229,
+                      "1": 0.00724,
+                      "2": 0.063017,
+                      "3": 0.507411,
+                      "4": 0.420042
+                    },
+                    "pick": "3",
+                    "confidence": 0.507411
+                  },
+                  "dealbreaker": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.015079,
+                      "no": 0.984921
+                    },
+                    "pick": "no",
+                    "confidence": 0.984921
+                  }
+                },
+                "latencyMs": 7050,
+                "usage": {
+                  "inputTokens": 316,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           },
@@ -7718,6 +10886,41 @@
                 "costUsd": 0.00022874999999999998,
                 "reason": "It meets rent, pet, and commute criteria but is a studio, so it fails the 2-bedroom must-have."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "fit": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.7392777392777392,
+                      "1": 0.24396324396324398,
+                      "2": 0.010784010784010785,
+                      "3": 0.0044550044550044545,
+                      "4": 0.0015200015200015201
+                    },
+                    "pick": "0",
+                    "confidence": 0.7392777392777392
+                  },
+                  "dealbreaker": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.996442,
+                      "no": 0.00355799999999995
+                    },
+                    "pick": "yes",
+                    "confidence": 0.996442
+                  }
+                },
+                "latencyMs": 6828,
+                "usage": {
+                  "inputTokens": 304,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {}
@@ -7794,6 +10997,41 @@
                 },
                 "costUsd": 0.00025184999999999997,
                 "reason": "Meets rent, bedrooms, and commute clearly; dog allowance is only negotiable rather than confirmed, so it is a good but not perfect fit and not a clear dealbreaker."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "fit": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.05350294649705351,
+                      "1": 0.2394667605332395,
+                      "2": 0.42851257148742855,
+                      "3": 0.23236276763723238,
+                      "4": 0.046154953845046164
+                    },
+                    "pick": "2",
+                    "confidence": 0.42851257148742855
+                  },
+                  "dealbreaker": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.913719,
+                      "no": 0.08628100000000005
+                    },
+                    "pick": "yes",
+                    "confidence": 0.913719
+                  }
+                },
+                "latencyMs": 9989,
+                "usage": {
+                  "inputTokens": 309,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           },
@@ -7872,6 +11110,41 @@
                 "costUsd": 0.00034409999999999996,
                 "reason": "It meets rent, dog, and bedroom requirements but fails the under-35-minute commute by being 50 minutes by bus."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "fit": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.119587,
+                      "1": 0.619696,
+                      "2": 0.216605,
+                      "3": 0.040516,
+                      "4": 0.003596
+                    },
+                    "pick": "1",
+                    "confidence": 0.619696
+                  },
+                  "dealbreaker": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.918229,
+                      "no": 0.08177100000000004
+                    },
+                    "pick": "yes",
+                    "confidence": 0.918229
+                  }
+                },
+                "latencyMs": 7850,
+                "usage": {
+                  "inputTokens": 310,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {}
@@ -7948,6 +11221,41 @@
                 },
                 "costUsd": 0.00024555000000000003,
                 "reason": "All must-have requirements are met, with quiet street as a bonus but no balcony/elevator mentioned."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "fit": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.0017,
+                      "1": 0.003101,
+                      "2": 0.028604,
+                      "3": 0.256577,
+                      "4": 0.710018
+                    },
+                    "pick": "4",
+                    "confidence": 0.710018
+                  },
+                  "dealbreaker": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.001005,
+                      "no": 0.998995
+                    },
+                    "pick": "no",
+                    "confidence": 0.998995
+                  }
+                },
+                "latencyMs": 7121,
+                "usage": {
+                  "inputTokens": 311,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           },
@@ -8026,6 +11334,41 @@
                 "costUsd": 0.0001965,
                 "reason": "All must-have criteria are met, with only nice-to-have features missing, so it is a good but not excellent fit."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "fit": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.0019499980500019502,
+                      "1": 0.005386994613005388,
+                      "2": 0.05210694789305211,
+                      "3": 0.646838353161647,
+                      "4": 0.2937177062822937
+                    },
+                    "pick": "3",
+                    "confidence": 0.646838353161647
+                  },
+                  "dealbreaker": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.000202,
+                      "no": 0.999798
+                    },
+                    "pick": "no",
+                    "confidence": 0.999798
+                  }
+                },
+                "latencyMs": 9301,
+                "usage": {
+                  "inputTokens": 312,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {}
@@ -8102,6 +11445,41 @@
                 },
                 "costUsd": 0.0002382,
                 "reason": "The listing meets rent, bedrooms, commute, and nice-to-haves, but explicitly does not allow dogs, violating a must-have."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "fit": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.2857317142682857,
+                      "1": 0.6787853212146787,
+                      "2": 0.02308197691802308,
+                      "3": 0.010429989570010428,
+                      "4": 0.001970998029001971
+                    },
+                    "pick": "1",
+                    "confidence": 0.6787853212146787
+                  },
+                  "dealbreaker": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.998718,
+                      "no": 0.0012820000000000054
+                    },
+                    "pick": "yes",
+                    "confidence": 0.998718
+                  }
+                },
+                "latencyMs": 8789,
+                "usage": {
+                  "inputTokens": 311,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           },
@@ -8180,6 +11558,41 @@
                 "costUsd": 0.00040695,
                 "reason": "It meets budget, pet, bedroom-count, and commute musts, though the shared-flat setup makes it only a good rather than excellent fit."
               }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "fit": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.004856990286019429,
+                      "1": 0.030086939826120353,
+                      "2": 0.1172977654044692,
+                      "3": 0.4213621572756855,
+                      "4": 0.4263961472077057
+                    },
+                    "pick": "4",
+                    "confidence": 0.4263961472077057
+                  },
+                  "dealbreaker": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.051276,
+                      "no": 0.948724
+                    },
+                    "pick": "no",
+                    "confidence": 0.948724
+                  }
+                },
+                "latencyMs": 6602,
+                "usage": {
+                  "inputTokens": 318,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
+              }
             }
           },
           "flipped": {}
@@ -8256,6 +11669,41 @@
                 },
                 "costUsd": 0.00026189999999999997,
                 "reason": "All must-have criteria are met, with the only notable downside being a top-floor walk-up without an elevator."
+              }
+            },
+            "local": {
+              "ok": true,
+              "result": {
+                "model": "local",
+                "answers": {
+                  "fit": {
+                    "type": "score",
+                    "probabilities": {
+                      "0": 0.000946,
+                      "1": 0.002588,
+                      "2": 0.011885,
+                      "3": 0.129126,
+                      "4": 0.855455
+                    },
+                    "pick": "4",
+                    "confidence": 0.855455
+                  },
+                  "dealbreaker": {
+                    "type": "noul",
+                    "probabilities": {
+                      "yes": 0.000905,
+                      "no": 0.999095
+                    },
+                    "pick": "no",
+                    "confidence": 0.999095
+                  }
+                },
+                "latencyMs": 7964,
+                "usage": {
+                  "inputTokens": 316,
+                  "outputTokens": 2
+                },
+                "costUsd": 0
               }
             }
           },

@@ -1,18 +1,19 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { MODELS } from "@/lib/bench";
 import { decide, stateOf, type DecideOutcome, type Settings } from "@/lib/client";
-import type { ModelId } from "@/lib/types";
+import type { LocalBackend, ModelId } from "@/lib/types";
 import { USE_CASES, getUseCase } from "@/lib/usecases";
 import { Card, ModelDot, ProbBars, modelName, usd } from "./ui";
 
 export function Playground({
   settings,
+  local,
   ready,
   onNeedKeys,
 }: {
   settings: Settings;
+  local: LocalBackend | null;
   ready: boolean;
   onNeedKeys: () => void;
 }) {
@@ -31,6 +32,7 @@ export function Playground({
   // Ground truth applies only while the example is unedited.
   const pristine = item && text === item.text && !upload;
   const images = upload ? [upload] : item?.images;
+  const models: ModelId[] = local ? ["elephant", "local", "challenger"] : ["elephant", "challenger"];
 
   function pick(ucId: string, index: number) {
     const next = getUseCase(ucId);
@@ -50,7 +52,7 @@ export function Playground({
     const state = upload ? { text, images: [upload] } : await stateOf({ text, images: item?.images });
     const request = { state, questions: uc.questions };
     await Promise.all(
-      MODELS.map(async (m) => {
+      models.map(async (m) => {
         const out = await decide(m, request, settings, session);
         setOutcomes((prev) => ({ ...prev, [m]: out }));
       }),
@@ -138,18 +140,18 @@ export function Playground({
             disabled={busy}
             className="rounded-md bg-foreground px-5 py-2 text-sm font-medium text-background disabled:opacity-50"
           >
-            {busy ? "Deciding…" : ready ? "Decide with both" : "Add API keys"}
+            {busy ? "Deciding…" : !ready ? "Add API keys" : local ? "Decide with all three" : "Decide with both"}
           </button>
         </div>
       </Card>
 
       {(busy || Object.keys(outcomes).length > 0) && (
-        <div className="grid gap-4 md:grid-cols-2">
-          {MODELS.map((m) => (
+        <div className={`grid gap-4 ${models.length > 2 ? "lg:grid-cols-3" : "md:grid-cols-2"}`}>
+          {models.map((m) => (
             <Result
               key={m}
               model={m}
-              title={modelName(m, settings.challenger)}
+              title={modelName(m, settings.challenger, local?.label)}
               outcome={outcomes[m]}
               questions={uc.questions}
               labels={pristine ? item.labels : undefined}

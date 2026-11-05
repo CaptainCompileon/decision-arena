@@ -3,7 +3,7 @@
 import { useState } from "react";
 import type { Settings } from "@/lib/client";
 import { CHALLENGER_PROVIDERS } from "@/lib/providers";
-import type { ChallengerProviderId } from "@/lib/types";
+import type { ChallengerProviderId, LocalBackend } from "@/lib/types";
 
 export type ServerKeys = { elephant: boolean; challenger: boolean };
 
@@ -13,11 +13,13 @@ const input =
 export function SettingsPanel({
   settings,
   serverKeys,
+  local,
   onSave,
   onClose,
 }: {
   settings: Settings;
   serverKeys: ServerKeys;
+  local: LocalBackend | null;
   onSave: (s: Settings) => void;
   onClose: () => void;
 }) {
@@ -86,6 +88,23 @@ export function SettingsPanel({
             onChange={(e) => setDraft({ ...draft, challengerKey: e.target.value })}
           />
         </fieldset>
+
+        <div className="space-y-1">
+          <div className="text-sm font-medium">Self-hosted elephant-1</div>
+          <p className="text-sm text-muted">
+            {local ? (
+              <span className="text-good">
+                Found {local.label}
+                {local.images ? ", with image input" : ", text only"}. No key needed.
+              </span>
+            ) : (
+              <>
+                Not running. On an Apple silicon Mac, run <code className="font-mono">npm run mlx</code>; for an
+                NVIDIA GPU, see the README&apos;s llama.cpp section. A deployed copy can&apos;t reach either.
+              </>
+            )}
+          </p>
+        </div>
 
         <div className="flex justify-end gap-2">
           <button className="rounded-md px-4 py-2 text-sm text-muted hover:text-foreground" onClick={onClose}>

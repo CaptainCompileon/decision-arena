@@ -1,5 +1,5 @@
 import { optionLabel, optionsOf } from "@/lib/answers";
-import { CHALLENGER_PROVIDERS, ELEPHANT } from "@/lib/providers";
+import { CHALLENGER_PROVIDERS, ELEPHANT, LOCAL_ELEPHANT } from "@/lib/providers";
 import type { Answer, ChallengerConfig, ModelId, Question } from "@/lib/types";
 
 export const pct = (x: number, digits = 0) => `${(x * 100).toFixed(digits)}%`;
@@ -11,14 +11,15 @@ export function usd(x: number) {
   return `$${x.toFixed(2)}`;
 }
 
-export function modelName(model: ModelId, challenger: ChallengerConfig) {
-  return model === "elephant"
-    ? ELEPHANT.label
-    : `${challenger.model} · ${CHALLENGER_PROVIDERS[challenger.provider].label}`;
+export function modelName(model: ModelId, challenger: ChallengerConfig, localLabel = LOCAL_ELEPHANT.label) {
+  if (model === "elephant") return ELEPHANT.label;
+  if (model === "local") return localLabel;
+  return `${challenger.model} · ${CHALLENGER_PROVIDERS[challenger.provider].label}`;
 }
 
-export const modelText = { elephant: "text-elephant", challenger: "text-challenger" } as const;
-export const modelBg = { elephant: "bg-elephant", challenger: "bg-challenger" } as const;
+export const modelText = { elephant: "text-elephant", local: "text-local", challenger: "text-challenger" } as const;
+export const modelBg = { elephant: "bg-elephant", local: "bg-local", challenger: "bg-challenger" } as const;
+export const modelColor = { elephant: "var(--elephant)", local: "var(--local)", challenger: "var(--challenger)" } as const;
 
 export function Card({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (

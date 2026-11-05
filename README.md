@@ -10,6 +10,7 @@ The question isn't only *who picks right more often*. It's also:
 - **Stability**: does the answer change when the options are listed in reverse order? (flip rate)
 - **Cost and latency** per 1,000 decisions
 - **Cascade**: let elephant-1 decide and escalate only the unsure cases to the chat model. How much accuracy does that buy per dollar?
+- **Local vs hosted**: optionally, the same elephant-1 quantized to 4 bits and run on your Mac with MLX. How often does it pick what the hosted model picks?
 
 ## The five use cases
 
@@ -36,9 +37,38 @@ npm run dev
 
 Without `.env.local`, paste the keys into the **API keys** dialog instead. They are kept in your browser's localStorage.
 
+### Optional: elephant-1 on your own Mac
+
+On Apple silicon, a third model can join: [`0x36/elephant-1-9B-MLX-4bit`](https://huggingface.co/0x36/elephant-1-9B-MLX-4bit), a community MLX conversion that ships its own `/v1/systemone` server. It is text-only (the vision tower wasn't converted), so it skips the screenshot items.
+
+```bash
+npm run mlx    # first run: creates .venv-mlx and downloads ~4.7 GB; then serves on 127.0.0.1:8765
+```
+
+The app finds it on its own (the **API keys** dialog says so) and adds it to the playground, the benchmark and the cascade, where it can be the first tier. On the **Benchmark** tab, **Add local runs** runs only the local model and adds it to the results already shown, without spending API calls. The script pins the repo to the revision whose `serve.py` was reviewed; read it before you run it. Set `LOCAL_ELEPHANT_URL` to use another address. Peak memory is about 5.2 GB.
+
+The local server answers one request at a time, so the benchmark sends it one request at a time too. Otherwise queueing would show up as latency.
+
+### Optional: elephant-1 on an NVIDIA GPU (llama.cpp)
+
+[`waseigo/elephant-1-decision-GGUF`](https://huggingface.co/waseigo/elephant-1-decision-GGUF) is a Q4_K_M GGUF with the metadata llama.cpp needs to serve it as a decision model, plus the vision tower, so **image items work too**. It needs about 6.3 GB of GPU memory and runs on Windows or Linux. On the GPU machine:
+
+1. Get llama.cpp **b11820 or newer** (the CUDA build from the [releases page](https://github.com/ggml-org/llama.cpp/releases), or build it yourself).
+2. Download `elephant-1-Q4_K_M.gguf` and `elephant-1.mmproj-Q8_0.gguf` from the repo above.
+3. Start the server. It has no authentication, so keep it on your home network:
+
+   ```bash
+   llama-server -m elephant-1-Q4_K_M.gguf --mmproj elephant-1.mmproj-Q8_0.gguf --mmproj-offload \
+     --image-min-tokens 1024 -c 32768 -fa on --jinja --cache-ram 0 --host 0.0.0.0 --port 8999
+   ```
+
+   The log must say `decision model type: openjev`.
+
+Then, on the machine running this app, put `LOCAL_ELEPHANT_URL=http://<gpu-machine-ip>:8999` in `.env.local` and restart `npm run dev`. The app recognises llama-server from the GGUF's file name and shows it as `elephant-1 · llama.cpp Q4_K_M (local)`. Each run remembers which local backend produced it, so MLX and llama.cpp results aren't mixed up under one name.
+
 ## Deploy (bring your own key)
 
-Deploy to Vercel **without** setting the two env vars. Each visitor then uses their own keys, which pass through `/api/decide` per request and are never stored. The proxy only forwards to Baseten and the three allow-listed challenger hosts.
+Deploy to Vercel **without** setting the two env vars. The local model is switched off on Vercel, where `127.0.0.1` isn't the visitor's machine; local results in the published snapshot still show. Each visitor then uses their own keys, which pass through `/api/decide` per request and are never stored. The proxy only forwards to Baseten and the three allow-listed challenger hosts.
 
 To show results to visitors who have no keys, run the benchmark, click **Export**, and commit the file as `public/results/latest.json`. The app shows it until a visitor runs their own.
 
@@ -46,9 +76,10 @@ To show results to visitors who have no keys, run the benchmark, click **Export*
 
 ```
 browser ── /api/decide ──┬─▶ Baseten System One API     (elephant-1: probabilities)
- (keys in headers)       └─▶ OpenAI-compatible chat API (challenger: JSON probabilities)
+ (keys in headers)       ├─▶ self-hosted elephant-1     (MLX serve.py or llama-server, same API, optional)
+                         └─▶ OpenAI-compatible chat API (challenger: JSON probabilities)
 ```
 
-- `src/lib/server/elephant.ts` passes requests to Baseten's `/v1/systemone` almost unchanged.
+- `src/lib/server/elephant.ts` passes requests to Baseten's `/v1/systemone` almost unchanged, and to a self-hosted server (MLX `serve.py` or llama-server), which speak the same API. `src/lib/server/local.ts` finds out which one is running.
 - `src/lib/server/challenger.ts` turns the same request into a prompt and parses the probabilities back.
 - `src/lib/bench.ts` holds the metrics (accuracy, Brier, ECE, flip rate) and the cascade simulation.

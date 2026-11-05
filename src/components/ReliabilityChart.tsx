@@ -1,15 +1,15 @@
 import type { ModelStats } from "@/lib/bench";
 import type { ModelId } from "@/lib/types";
+import { modelColor as COLOR } from "./ui";
 
 const W = 360;
 const H = 300;
 const PAD = { l: 44, r: 12, t: 12, b: 36 };
 const x = (v: number) => PAD.l + v * (W - PAD.l - PAD.r);
 const y = (v: number) => H - PAD.b - v * (H - PAD.t - PAD.b);
-const COLOR: Record<ModelId, string> = { elephant: "var(--elephant)", challenger: "var(--challenger)" };
 
 // Confidence (x) against how often that confidence was right (y).
-export function ReliabilityChart({ stats }: { stats: Record<ModelId, ModelStats> }) {
+export function ReliabilityChart({ stats }: { stats: Partial<Record<ModelId, ModelStats>> }) {
   const ticks = [0, 0.2, 0.4, 0.6, 0.8, 1];
   return (
     <svg viewBox={`0 0 ${W} ${H}`} className="mt-4 w-full max-w-md" role="img" aria-label="Reliability chart">
@@ -37,8 +37,8 @@ export function ReliabilityChart({ stats }: { stats: Record<ModelId, ModelStats>
         actually right
       </text>
       {(Object.keys(stats) as ModelId[]).map((m) => {
-        const pts = stats[m].bins.filter((b) => b.n > 0);
-        const max = Math.max(1, ...Object.values(stats).flatMap((s) => s.bins.map((b) => b.n)));
+        const pts = stats[m]!.bins.filter((b) => b.n > 0);
+        const max = Math.max(1, ...Object.values(stats).flatMap((s) => s!.bins.map((b) => b.n)));
         return (
           <g key={m}>
             <polyline

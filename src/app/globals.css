@@ -7,6 +7,7 @@
   --muted: #646a73;
   --line: #e3e4e0;
   --elephant: #0f766e;
+  --local: #b45309;
   --challenger: #7c3aed;
   --good: #15803d;
   --bad: #b91c1c;
@@ -20,6 +21,7 @@
     --muted: #9aa0a8;
     --line: #2c2f33;
     --elephant: #2dd4bf;
+    --local: #fbbf24;
     --challenger: #a78bfa;
     --good: #4ade80;
     --bad: #f87171;
@@ -33,6 +35,7 @@
   --color-muted: var(--muted);
   --color-line: var(--line);
   --color-elephant: var(--elephant);
+  --color-local: var(--local);
   --color-challenger: var(--challenger);
   --color-good: var(--good);
   --color-bad: var(--bad);

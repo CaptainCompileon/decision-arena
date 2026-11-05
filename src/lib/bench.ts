@@ -13,10 +13,19 @@ export type BenchRun = {
   useCaseId: string;
   finishedAt: string;
   challenger: ChallengerConfig;
+  // Which self-hosted backend produced the local results. Missing in runs
+  // from before llama.cpp support, which all came from the MLX port.
+  local?: string;
   items: ItemRun[];
 };
 
-export const MODELS: ModelId[] = ["elephant", "challenger"];
+export const MODELS: ModelId[] = ["elephant", "local", "challenger"];
+
+// Models with at least one result, in MODELS order. Older snapshots have no
+// local runs, and a deployed copy can't reach a local server.
+export function modelsIn(runs: BenchRun[]): ModelId[] {
+  return MODELS.filter((m) => runs.some((r) => r.items.some((ir) => ir.runs[m])));
+}
 
 // Reverses option order of every choice question. The option names stay the
 // same, so answers can be compared directly with the original run.
@@ -91,13 +100,13 @@ export function calibrationBins(scored: Scored[], count = 5): CalibrationBin[] {
   return bins;
 }
 
-// With sharedOnly, items that any model couldn't answer are left out, so the
-// headline numbers compare the same questions.
+// With sharedWith, only items that every one of those models answered count,
+// so the headline numbers compare the same questions.
 export function score(
   useCases: UseCase[],
   runs: BenchRun[],
   model: ModelId,
-  { sharedOnly = false } = {},
+  { sharedWith }: { sharedWith?: ModelId[] } = {},
 ): ModelStats {
   const scored: Scored[] = [];
   const latencies: number[] = [];
@@ -115,7 +124,7 @@ export function score(
       const item = uc.items.find((i) => i.id === ir.itemId);
       const out = ir.runs[model];
       if (!item || !out) continue;
-      if (sharedOnly && MODELS.some((m) => ir.runs[m]?.ok === false)) continue;
+      if (sharedWith?.some((m) => !ir.runs[m]?.ok)) continue;
       if (!out.ok) {
         if (out.unsupported) unsupported++;
         else errors++;
@@ -159,6 +168,29 @@ export function score(
   };
 }
 
+// How often two models pick the same option, over the answers both gave. For
+// local against elephant this measures what 4-bit quantization changes.
+export function agreement(runs: BenchRun[], a: ModelId, b: ModelId) {
+  let same = 0;
+  let n = 0;
+  let gap = 0;
+  for (const run of runs) {
+    for (const ir of run.items) {
+      const x = ir.runs[a];
+      const y = ir.runs[b];
+      if (!x?.ok || !y?.ok) continue;
+      for (const [name, ax] of Object.entries(x.result.answers)) {
+        const ay = y.result.answers[name];
+        if (!ay) continue;
+        n++;
+        if (ax.pick === ay.pick) same++;
+        gap += Math.abs((ax.probabilities[ax.pick] ?? 0) - (ay.probabilities[ax.pick] ?? 0));
+      }
+    }
+  }
+  return { rate: n ? same / n : 0, meanGap: n ? gap / n : 0, n };
+}
+
 export type CascadePoint = {
   threshold: Thresholds;
   accuracy: number;
@@ -170,10 +202,15 @@ export type CascadePoint = {
 // One threshold for every use case, or one per use case id.
 export type Thresholds = number | Record<string, number>;
 
-// Elephant answers first; any item where its least-confident answer is below
-// the threshold goes to the challenger. Simulated from benchmark runs, so
-// moving the slider costs nothing.
-export function cascade(useCases: UseCase[], runs: BenchRun[], threshold: Thresholds): CascadePoint {
+// The first model (elephant-1, hosted or local) answers; any item where its
+// least-confident answer is below the threshold goes to the challenger.
+// Simulated from benchmark runs, so moving the slider costs nothing.
+export function cascade(
+  useCases: UseCase[],
+  runs: BenchRun[],
+  threshold: Thresholds,
+  first: ModelId = "elephant",
+): CascadePoint {
   let correct = 0;
   let answered = 0;
   let items = 0;
@@ -186,7 +223,7 @@ export function cascade(useCases: UseCase[], runs: BenchRun[], threshold: Thresh
     const t = typeof threshold === "number" ? threshold : (threshold[uc.id] ?? 0);
     for (const ir of run.items) {
       const item = uc.items.find((i) => i.id === ir.itemId);
-      const e = ir.runs.elephant;
+      const e = ir.runs[first];
       if (!item || !e?.ok) continue;
       const c = ir.runs.challenger;
       items++;

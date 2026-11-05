@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { MODELS, cascade, type BenchRun } from "@/lib/bench";
-import type { ChallengerConfig } from "@/lib/types";
+import { cascade, modelsIn, type BenchRun } from "@/lib/bench";
+import type { ChallengerConfig, ModelId } from "@/lib/types";
 import { USE_CASES } from "@/lib/usecases";
-import { Card, ModelDot, Stat, modelName, pct, usd } from "./ui";
+import { Card, ModelDot, Stat, modelColor, modelName, pct, usd } from "./ui";
 
 const W = 520;
 const H = 260;
@@ -14,14 +14,23 @@ export function Cascade({ runs, challenger }: { runs: Record<string, BenchRun>; 
   const [threshold, setThreshold] = useState(0.8);
   // Use cases whose slider was moved keep their own threshold; the rest follow the global one.
   const [overrides, setOverrides] = useState<Record<string, number>>({});
+  const [firstChoice, setFirst] = useState<ModelId>("elephant");
   const all = Object.values(runs);
+  const present = modelsIn(all);
+  // The first tier is elephant-1, hosted or local; fall back if the chosen one has no runs.
+  const firstOptions: ModelId[] = present.filter((m) => m !== "challenger");
+  const first = firstOptions.includes(firstChoice) ? firstChoice : (firstOptions[0] ?? "elephant");
+  const runLocal = all.find((r) => r.local)?.local;
+  const firstName = modelName(first, challenger, runLocal);
+  // The MLX port (and llama.cpp without --mmproj) skipped the image items.
+  const localSkippedImages = all.some((r) => r.items.some((ir) => ir.runs.local?.ok === false && ir.runs.local.unsupported));
   const runChallenger = all[0]?.challenger ?? challenger;
   const ran = USE_CASES.filter((u) => runs[u.id]);
   const thresholds = Object.fromEntries(ran.map((u) => [u.id, overrides[u.id] ?? threshold]));
 
   // The React Compiler memoizes these, so the sweep only reruns when runs change.
-  const sweep = Array.from({ length: 21 }, (_, i) => cascade(USE_CASES, all, i / 20));
-  const current = cascade(USE_CASES, all, thresholds);
+  const sweep = Array.from({ length: 21 }, (_, i) => cascade(USE_CASES, all, i / 20, first));
+  const current = cascade(USE_CASES, all, thresholds, first);
   const custom = Object.keys(overrides).length > 0;
   // Both baselines cover the same items as the cascade: at 0% nothing is
   // escalated, at 100% everything the challenger can handle is.
@@ -50,6 +59,29 @@ export function Cascade({ runs, challenger }: { runs: Record<string, BenchRun>; 
           the item goes to the challenger instead. Items the challenger can&apos;t handle (images) stay with
           elephant-1. This is simulated from your benchmark runs, so moving the slider is free.
         </p>
+        {firstOptions.length > 1 && (
+          <div className="mt-4 flex flex-wrap items-center gap-2 text-sm" role="radiogroup" aria-label="First tier">
+            <span className="text-muted">First tier:</span>
+            {firstOptions.map((m) => (
+              <button
+                key={m}
+                role="radio"
+                aria-checked={first === m}
+                onClick={() => setFirst(m)}
+                className={`flex items-center gap-1.5 rounded-md border px-2.5 py-1 ${
+                  first === m ? "border-foreground" : "border-line text-muted hover:border-muted"
+                }`}
+              >
+                <ModelDot model={m} /> {modelName(m, challenger, runLocal)}
+              </button>
+            ))}
+            {first === "local" && localSkippedImages && (
+              <span className="text-xs text-muted">
+                These local runs are text-only, so image items drop out of every number here.
+              </span>
+            )}
+          </div>
+        )}
 
         <label className="mt-5 block">
           <div className="flex justify-between text-sm">
@@ -71,14 +103,14 @@ export function Cascade({ runs, challenger }: { runs: Record<string, BenchRun>; 
           <Stat label="Cascade accuracy" value={pct(current.accuracy, 1)} hint={`${usd(current.costPer1k)} per 1k`} />
           <Stat label="Sent to challenger" value={pct(current.escalated)} hint="of items" />
           <Stat
-            label="elephant-1 only"
+            label={`${first === "local" ? "Local" : "elephant-1"} only`}
             value={pct(elephantOnly.accuracy, 1)}
             hint={`${usd(elephantOnly.costPer1k)} per 1k`}
           />
           <Stat
             label="Challenger wherever it can"
             value={pct(challengerOnly.accuracy, 1)}
-            hint={`${usd(challengerOnly.costPer1k)} per 1k, images stay with elephant-1`}
+            hint={`${usd(challengerOnly.costPer1k)} per 1k${first === "elephant" ? ", images stay with elephant-1" : ""}`}
           />
         </div>
       </Card>
@@ -100,8 +132,8 @@ export function Cascade({ runs, challenger }: { runs: Record<string, BenchRun>; 
         <ul className="mt-5 space-y-5">
           {ran.map((u) => {
             const t = thresholds[u.id];
-            const own = cascade(USE_CASES, [runs[u.id]], t);
-            const base = cascade(USE_CASES, [runs[u.id]], 0);
+            const own = cascade(USE_CASES, [runs[u.id]], t, first);
+            const base = cascade(USE_CASES, [runs[u.id]], 0, first);
             return (
               <li key={u.id}>
                 <div className="flex flex-wrap items-baseline justify-between gap-x-4 text-sm">
@@ -122,7 +154,7 @@ export function Cascade({ runs, challenger }: { runs: Record<string, BenchRun>; 
                     )}
                   </span>
                   <span className="font-mono text-xs tabular-nums text-muted">
-                    {pct(own.accuracy, 1)} (elephant-1 alone {pct(base.accuracy, 1)}) · {pct(own.escalated)} escalated ·{" "}
+                    {pct(own.accuracy, 1)} ({first === "local" ? "local" : "elephant-1"} alone {pct(base.accuracy, 1)}) · {pct(own.escalated)} escalated ·{" "}
                     <span className="text-foreground">{pct(t)}</span>
                   </span>
                 </div>
@@ -178,8 +210,8 @@ export function Cascade({ runs, challenger }: { runs: Record<string, BenchRun>; 
             strokeWidth="1.5"
             points={sweep.map((p) => `${x(p.costPer1k)},${y(p.accuracy)}`).join(" ")}
           />
-          <circle cx={x(sweep[0].costPer1k)} cy={y(sweep[0].accuracy)} r="6" fill="var(--elephant)">
-            <title>elephant-1 only</title>
+          <circle cx={x(sweep[0].costPer1k)} cy={y(sweep[0].accuracy)} r="6" fill={modelColor[first]}>
+            <title>{`${firstName} only`}</title>
           </circle>
           <circle cx={x(challengerOnly.costPer1k)} cy={y(challengerOnly.accuracy)} r="6" fill="var(--challenger)">
             <title>Challenger wherever it can</title>
@@ -189,9 +221,9 @@ export function Cascade({ runs, challenger }: { runs: Record<string, BenchRun>; 
           </circle>
         </svg>
         <div className="mt-2 flex flex-wrap gap-x-5 text-xs text-muted">
-          {MODELS.map((m) => (
+          {([first, "challenger"] as ModelId[]).map((m) => (
             <span key={m} className="flex items-center gap-1.5">
-              <ModelDot model={m} /> {modelName(m, runChallenger)}
+              <ModelDot model={m} /> {modelName(m, runChallenger, runLocal)}
             </span>
           ))}
           <span>○ {custom ? "current thresholds" : "current threshold"}</span>

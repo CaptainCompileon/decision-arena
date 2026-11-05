@@ -2,21 +2,34 @@
 
 import { useState } from "react";
 import { optionLabel } from "@/lib/answers";
-import { MODELS, flipRequest, hasChoice, score, type BenchRun, type ItemRun, type ModelStats } from "@/lib/bench";
+import {
+  agreement,
+  flipRequest,
+  hasChoice,
+  modelsIn,
+  score,
+  type BenchRun,
+  type ItemRun,
+  type ModelStats,
+} from "@/lib/bench";
 import { decide, pool, stateOf, type DecideOutcome, type Settings } from "@/lib/client";
-import type { ModelId } from "@/lib/types";
+import type { LocalBackend, ModelId } from "@/lib/types";
 import { USE_CASES, type UseCase } from "@/lib/usecases";
 import type { RunSource } from "./Arena";
 import { ReliabilityChart } from "./ReliabilityChart";
 import { Card, ModelDot, Stat, modelName, modelText, pct, usd } from "./ui";
 
 const CONCURRENCY = 4;
+// The local server handles one request at a time; sending more only makes
+// them queue, and the queueing would count as latency.
+const LOCAL_CONCURRENCY = 1;
 
 export function Benchmark({
   settings,
   runs,
   runSource,
   ready,
+  local,
   onNeedKeys,
   onRun,
   onClear,
@@ -25,43 +38,54 @@ export function Benchmark({
   runs: Record<string, BenchRun>;
   runSource: RunSource;
   ready: boolean;
+  local: LocalBackend | null;
   onNeedKeys: () => void;
-  onRun: (run: BenchRun) => void;
+  onRun: (run: BenchRun, opts: { addsToShown: boolean }) => void;
   onClear: () => void;
 }) {
   const [flipTest, setFlipTest] = useState(true);
+  const [withLocal, setWithLocal] = useState(true);
   const [progress, setProgress] = useState<{ done: number; total: number; label: string } | null>(null);
   const [selected, setSelected] = useState(USE_CASES[0].id);
 
   const allRuns = Object.values(runs);
+  const present = modelsIn(allRuns);
   const stats = Object.fromEntries(
-    MODELS.map((m) => [m, score(USE_CASES, allRuns, m, { sharedOnly: true })]),
-  ) as Record<ModelId, ModelStats>;
-  const allItems = Object.fromEntries(MODELS.map((m) => [m, score(USE_CASES, allRuns, m)])) as Record<
-    ModelId,
-    ModelStats
+    present.map((m) => [m, score(USE_CASES, allRuns, m, { sharedWith: present })]),
+  ) as Partial<Record<ModelId, ModelStats>>;
+  const allItems = Object.fromEntries(present.map((m) => [m, score(USE_CASES, allRuns, m)])) as Partial<
+    Record<ModelId, ModelStats>
   >;
   const runChallenger = allRuns[0]?.challenger ?? settings.challenger;
+  const runLocal = allRuns.find((r) => r.local)?.local;
+  const fullModels: ModelId[] = local && withLocal ? ["elephant", "local", "challenger"] : ["elephant", "challenger"];
 
-  async function runUseCases(list: UseCase[]) {
-    if (!ready) return onNeedKeys();
+  // With addsToShown, only `models` are run and their results are written
+  // into the runs already shown (used to add the local model to a snapshot).
+  async function runUseCases(list: UseCase[], models: ModelId[], addsToShown = false) {
+    if (!addsToShown && !ready) return onNeedKeys();
     const sessionId = crypto.randomUUID();
     const total = list.reduce(
-      (s, u) => s + u.items.length * MODELS.length * (flipTest && hasChoice(u) ? 2 : 1),
+      (s, u) => s + u.items.length * models.length * (flipTest && hasChoice(u) ? 2 : 1),
       0,
     );
     let done = 0;
     for (const uc of list) {
       setProgress({ done, total, label: uc.title });
-      const items: ItemRun[] = uc.items.map((it) => ({ itemId: it.id, runs: {}, flipped: {} }));
-      const tasks: (() => Promise<void>)[] = [];
+      const existing = addsToShown ? runs[uc.id] : undefined;
+      const items: ItemRun[] = uc.items.map((it) => {
+        const prev = existing?.items.find((r) => r.itemId === it.id);
+        return { itemId: it.id, runs: { ...prev?.runs }, flipped: { ...prev?.flipped } };
+      });
+      const remoteTasks: (() => Promise<void>)[] = [];
+      const localTasks: (() => Promise<void>)[] = [];
       for (const [i, item] of uc.items.entries()) {
-        for (const m of MODELS) {
+        for (const m of models) {
           const variants: ("runs" | "flipped")[] = flipTest && hasChoice(uc) ? ["runs", "flipped"] : ["runs"];
           for (const v of variants) {
-            tasks.push(async () => {
+            (m === "local" ? localTasks : remoteTasks).push(async () => {
               let out: DecideOutcome;
-              if (m === "challenger" && item.images?.length) {
+              if (item.images?.length && (m === "challenger" || (m === "local" && !local?.images))) {
                 out = { ok: false, error: "No image input", unsupported: true };
               } else {
                 const request = { state: await stateOf(item), questions: uc.questions };
@@ -74,8 +98,17 @@ export function Benchmark({
           }
         }
       }
-      await pool(tasks, CONCURRENCY);
-      onRun({ useCaseId: uc.id, finishedAt: new Date().toISOString(), challenger: settings.challenger, items });
+      await Promise.all([pool(remoteTasks, CONCURRENCY), pool(localTasks, LOCAL_CONCURRENCY)]);
+      onRun(
+        {
+          useCaseId: uc.id,
+          finishedAt: new Date().toISOString(),
+          challenger: existing?.challenger ?? settings.challenger,
+          local: models.includes("local") ? local?.label : existing?.local,
+          items,
+        },
+        { addsToShown },
+      );
     }
     setProgress(null);
   }
@@ -109,9 +142,25 @@ export function Benchmark({
               <input type="checkbox" checked={flipTest} onChange={(e) => setFlipTest(e.target.checked)} />
               Option-order flip test
             </label>
+            {local && (
+              <label className="flex items-center gap-2">
+                <input type="checkbox" checked={withLocal} onChange={(e) => setWithLocal(e.target.checked)} />
+                <ModelDot model="local" /> Include local
+              </label>
+            )}
+            {local && allRuns.length > 0 && (
+              <button
+                disabled={busy}
+                onClick={() => runUseCases(USE_CASES, ["local"], true)}
+                className="rounded-md border border-line px-4 py-2 font-medium hover:border-foreground disabled:opacity-50"
+                title="Runs only the local model and adds it to the results shown, free"
+              >
+                Add local runs
+              </button>
+            )}
             <button
               disabled={busy}
-              onClick={() => runUseCases(USE_CASES)}
+              onClick={() => runUseCases(USE_CASES, fullModels)}
               className="rounded-md bg-foreground px-4 py-2 font-medium text-background disabled:opacity-50"
             >
               Run all five
@@ -148,13 +197,21 @@ export function Benchmark({
 
       {allRuns.length > 0 && (
         <>
-          <div className="grid gap-4 md:grid-cols-2">
-            {MODELS.map((m) => (
-              <SummaryCard key={m} model={m} title={modelName(m, runChallenger)} s={stats[m]} all={allItems[m]} />
+          <div className={`grid gap-4 ${present.length > 2 ? "lg:grid-cols-3" : "md:grid-cols-2"}`}>
+            {present.map((m) => (
+              <SummaryCard
+                key={m}
+                model={m}
+                title={modelName(m, runChallenger, runLocal)}
+                s={stats[m]!}
+                all={allItems[m]!}
+                agreesWithHosted={m === "local" ? agreement(allRuns, "local", "elephant") : undefined}
+              />
             ))}
           </div>
           <p className="-mt-2 text-xs text-muted">
-            Both cards count only the items both models could answer, so they compare the same questions.
+            {present.length > 2 ? "Every card counts" : "Both cards count"} only the items all{" "}
+            {present.length} models could answer, so they compare the same questions.
           </p>
 
           <Card>
@@ -173,14 +230,14 @@ export function Benchmark({
                 <thead className="text-left text-xs uppercase tracking-wide text-muted">
                   <tr>
                     <th className="py-2 pr-4 font-normal">Use case</th>
-                    {MODELS.map((m) => (
+                    {present.map((m) => (
                       <th key={m} className="py-2 pr-4 font-normal">
                         <span className="flex items-center gap-1.5">
                           <ModelDot model={m} /> accuracy
                         </span>
                       </th>
                     ))}
-                    {MODELS.map((m) => (
+                    {present.map((m) => (
                       <th key={m} className="py-2 pr-4 font-normal">
                         <span className="flex items-center gap-1.5">
                           <ModelDot model={m} /> flips
@@ -194,7 +251,7 @@ export function Benchmark({
                   {USE_CASES.map((u) => {
                     const run = runs[u.id];
                     const per = run
-                      ? (Object.fromEntries(MODELS.map((m) => [m, score([u], [run], m)])) as Record<ModelId, ModelStats>)
+                      ? (Object.fromEntries(present.map((m) => [m, score([u], [run], m)])) as Record<ModelId, ModelStats>)
                       : null;
                     return (
                       <tr
@@ -206,12 +263,12 @@ export function Benchmark({
                             {u.title}
                           </button>
                         </td>
-                        {MODELS.map((m) => (
+                        {present.map((m) => (
                           <td key={m} className="py-2 pr-4 font-mono tabular-nums">
                             {!per ? "–" : per[m].answered ? pct(per[m].accuracy) : per[m].unsupported ? "can't see images" : "–"}
                           </td>
                         ))}
-                        {MODELS.map((m) => (
+                        {present.map((m) => (
                           <td key={m} className="py-2 pr-4 font-mono tabular-nums">
                             {per?.[m].flipRate != null ? pct(per[m].flipRate!) : "–"}
                           </td>
@@ -219,7 +276,7 @@ export function Benchmark({
                         <td className="py-2 text-right">
                           <button
                             disabled={busy}
-                            onClick={() => runUseCases([u])}
+                            onClick={() => runUseCases([u], fullModels)}
                             className="text-xs text-muted hover:text-foreground disabled:opacity-50"
                           >
                             {run ? "Re-run" : "Run"}
@@ -233,14 +290,28 @@ export function Benchmark({
             </div>
           </Card>
 
-          {runs[selected] && <ItemTable uc={USE_CASES.find((u) => u.id === selected)!} run={runs[selected]} />}
+          {runs[selected] && (
+            <ItemTable uc={USE_CASES.find((u) => u.id === selected)!} run={runs[selected]} models={present} />
+          )}
         </>
       )}
     </div>
   );
 }
 
-function SummaryCard({ model, title, s, all }: { model: ModelId; title: string; s: ModelStats; all: ModelStats }) {
+function SummaryCard({
+  model,
+  title,
+  s,
+  all,
+  agreesWithHosted,
+}: {
+  model: ModelId;
+  title: string;
+  s: ModelStats;
+  all: ModelStats;
+  agreesWithHosted?: ReturnType<typeof agreement>;
+}) {
   return (
     <Card>
       <h3 className="flex items-center gap-2 font-medium">
@@ -255,9 +326,25 @@ function SummaryCard({ model, title, s, all }: { model: ModelId; title: string; 
           value={s.flipRate == null ? "–" : pct(s.flipRate, 1)}
           hint={s.flipRate == null ? "not run" : `of ${s.flipChecked} choice answers`}
         />
-        <Stat label="Median latency" value={`${Math.round(s.medianLatencyMs)} ms`} />
-        <Stat label="Per 1k decisions" value={usd(s.costPer1k)} hint={model === "challenger" ? "list-price estimate" : undefined} />
+        <Stat
+          label="Median latency"
+          value={`${Math.round(s.medianLatencyMs)} ms`}
+          hint={model === "local" ? "on this machine" : undefined}
+        />
+        <Stat
+          label="Per 1k decisions"
+          value={usd(s.costPer1k)}
+          hint={model === "challenger" ? "list-price estimate" : model === "local" ? "only electricity" : undefined}
+        />
       </div>
+      {agreesWithHosted && agreesWithHosted.n > 0 && (
+        <p className="mt-3 text-sm">
+          Same pick as hosted elephant-1 on{" "}
+          <span className="font-mono">{pct(agreesWithHosted.rate, 1)}</span> of {agreesWithHosted.n} answers. Its
+          probability for that pick differs by {pct(agreesWithHosted.meanGap, 1)} on average: that&apos;s what 4-bit
+          quantization (and the port) changes.
+        </p>
+      )}
       {(all.errors > 0 || all.unsupported > 0 || all.answered > s.answered) && (
         <p className="mt-3 text-xs text-muted">
           {all.errors > 0 && <span className="text-bad">{all.errors} failed calls. </span>}
@@ -273,7 +360,7 @@ function SummaryCard({ model, title, s, all }: { model: ModelId; title: string; 
   );
 }
 
-function ItemTable({ uc, run }: { uc: UseCase; run: BenchRun }) {
+function ItemTable({ uc, run, models }: { uc: UseCase; run: BenchRun; models: ModelId[] }) {
   const questions = Object.entries(uc.questions);
   return (
     <Card>
@@ -300,7 +387,7 @@ function ItemTable({ uc, run }: { uc: UseCase; run: BenchRun }) {
                   {questions.map(([name, q]) => (
                     <td key={name} className="py-2 pr-4">
                       <div className="text-xs text-muted">truth: {optionLabel(q, item.labels[name])}</div>
-                      {MODELS.map((m) => {
+                      {models.map((m) => {
                         const out = ir?.runs[m];
                         if (!out) return null;
                         if (!out.ok)

@@ -10,6 +10,16 @@ export const ELEPHANT = {
   price: { input: 0.035, output: 0 },
 };
 
+// The community MLX conversion, served by the repo's own serve.py with the
+// same /v1/systemone API. Local, so it costs nothing per call. Only enabled
+// off Vercel, where 127.0.0.1 is the developer's own machine.
+export const LOCAL_ELEPHANT = {
+  model: "elephant-1",
+  label: "elephant-1 · MLX 4-bit (local)",
+  repo: "0x36/elephant-1-9B-MLX-4bit",
+  price: { input: 0, output: 0 },
+};
+
 type ChallengerProvider = {
   label: string;
   baseUrl: string;

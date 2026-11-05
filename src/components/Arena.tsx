@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { BenchRun } from "@/lib/bench";
+import { modelsIn, type BenchRun } from "@/lib/bench";
 import { DEFAULT_SETTINGS, loadSettings, saveSettings, type Settings } from "@/lib/client";
+import type { LocalBackend } from "@/lib/types";
 import { Benchmark } from "./Benchmark";
 import { Cascade } from "./Cascade";
 import { Playground } from "./Playground";
@@ -20,8 +21,13 @@ export function Arena() {
   const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
   const [serverKeys, setServerKeys] = useState<ServerKeys>({ elephant: false, challenger: false });
   const [showSettings, setShowSettings] = useState(false);
-  const [runs, setRuns] = useState<Record<string, BenchRun>>({});
-  const [runSource, setRunSource] = useState<RunSource>("none");
+  const [local, setLocal] = useState<LocalBackend | null>(null);
+  // One state object, so updateRun sees the current source even when it's
+  // called from a benchmark loop that started several renders ago.
+  const [{ runs, runSource }, setData] = useState<{ runs: Record<string, BenchRun>; runSource: RunSource }>({
+    runs: {},
+    runSource: "none",
+  });
 
   useEffect(() => {
     // Browser-only state is read after mount so server and client HTML match.
@@ -29,7 +35,10 @@ export function Arena() {
     setSettings(loadSettings());
     fetch("/api/config")
       .then((r) => r.json())
-      .then((c) => setServerKeys(c.serverKeys))
+      .then((c) => {
+        setServerKeys(c.serverKeys);
+        setLocal(c.local ?? null);
+      })
       .catch(() => {});
 
     let local: Record<string, BenchRun> | null = null;
@@ -38,44 +47,42 @@ export function Arena() {
       if (raw) local = JSON.parse(raw);
     } catch {}
     if (local && Object.keys(local).length) {
-      setRuns(local);
-      setRunSource("local");
+      setData({ runs: local, runSource: "local" });
     } else {
       // No runs of your own yet: show the published snapshot, if there is one.
       fetch("/results/latest.json")
         .then((r) => (r.ok ? r.json() : null))
         .then((snap) => {
-          if (snap?.runs) {
-            setRuns(snap.runs);
-            setRunSource("snapshot");
-          }
+          if (snap?.runs) setData({ runs: snap.runs, runSource: "snapshot" });
         })
         .catch(() => {});
     }
   }, []);
 
-  function updateRun(run: BenchRun) {
-    setRuns((prev) => {
-      const base = runSource === "snapshot" ? {} : prev;
+  // A full run replaces the snapshot. A run that only adds a model (local
+  // only) builds on whatever is shown, snapshot included.
+  function updateRun(run: BenchRun, { addsToShown = false } = {}) {
+    setData((prev) => {
+      const base = prev.runSource === "snapshot" && !addsToShown ? {} : prev.runs;
       const next = { ...base, [run.useCaseId]: run };
       try {
         localStorage.setItem(RUNS_KEY, JSON.stringify(next));
       } catch {}
-      return next;
+      return { runs: next, runSource: "local" };
     });
-    setRunSource("local");
   }
 
   function clearRuns() {
     try {
       localStorage.removeItem(RUNS_KEY);
     } catch {}
-    setRuns({});
-    setRunSource("none");
+    setData({ runs: {}, runSource: "none" });
   }
 
   const hasElephantKey = !!settings.basetenKey || serverKeys.elephant;
   const hasChallengerKey = !!settings.challengerKey || serverKeys.challenger;
+  const runLocal = Object.values(runs).find((r) => r.local)?.local;
+  const showLocal = !!local || modelsIn(Object.values(runs)).includes("local");
 
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6">
@@ -91,6 +98,12 @@ export function Arena() {
             <span className="flex items-center gap-2">
               <ModelDot model="elephant" /> {modelName("elephant", settings.challenger)}
             </span>
+            {showLocal && (
+              <span className="flex items-center gap-2">
+                <ModelDot model="local" /> {modelName("local", settings.challenger, local?.label ?? runLocal)}
+                {!local && <span className="text-xs text-muted">(results only, server not running)</span>}
+              </span>
+            )}
             <span className="flex items-center gap-2">
               <ModelDot model="challenger" /> {modelName("challenger", settings.challenger)}
             </span>
@@ -122,7 +135,12 @@ export function Arena() {
 
       <main className="mt-6">
         {tab === "Playground" && (
-          <Playground settings={settings} onNeedKeys={() => setShowSettings(true)} ready={hasElephantKey} />
+          <Playground
+            settings={settings}
+            local={local}
+            onNeedKeys={() => setShowSettings(true)}
+            ready={hasElephantKey}
+          />
         )}
         {tab === "Benchmark" && (
           <Benchmark
@@ -130,6 +148,7 @@ export function Arena() {
             runs={runs}
             runSource={runSource}
             ready={hasElephantKey && hasChallengerKey}
+            local={local}
             onNeedKeys={() => setShowSettings(true)}
             onRun={updateRun}
             onClear={clearRuns}
@@ -147,6 +166,7 @@ export function Arena() {
         <SettingsPanel
           settings={settings}
           serverKeys={serverKeys}
+          local={local}
           onSave={(s) => {
             setSettings(s);
             saveSettings(s);

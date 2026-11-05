@@ -1,6 +1,6 @@
 import { CHALLENGER_PROVIDERS } from "@/lib/providers";
 import { decideWithChallenger, ImagesNotSupported } from "@/lib/server/challenger";
-import { decideWithElephant } from "@/lib/server/elephant";
+import { decideWithElephant, decideWithLocal } from "@/lib/server/elephant";
 import { serverKey } from "@/lib/server/keys";
 import type { ChallengerConfig, DecisionRequest, ModelId } from "@/lib/types";
 
@@ -31,6 +31,10 @@ export async function POST(request: Request) {
       return Response.json(await decideWithElephant(body.request, key));
     }
 
+    if (body.model === "local") {
+      return Response.json(await decideWithLocal(body.request));
+    }
+
     if (body.model === "challenger") {
       const config = body.challenger;
       if (!config || !(config.provider in CHALLENGER_PROVIDERS) || !config.model) {
@@ -42,7 +46,7 @@ export async function POST(request: Request) {
       return Response.json(await decideWithChallenger(body.request, config, key, session));
     }
 
-    return Response.json({ error: "model must be elephant or challenger" }, { status: 400 });
+    return Response.json({ error: "model must be elephant, local or challenger" }, { status: 400 });
   } catch (err) {
     if (err instanceof ImagesNotSupported) {
       return Response.json({ error: err.message, unsupported: true }, { status: 422 });

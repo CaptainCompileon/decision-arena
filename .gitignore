@@ -43,3 +43,6 @@ next-env.d.ts
 
 # local Claude Code launch config
 /.claude/
+
+# local MLX server (npm run mlx)
+/.venv-mlx/

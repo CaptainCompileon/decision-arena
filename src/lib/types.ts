@@ -41,7 +41,8 @@ export type Answer = {
   confidence: number; // probability of the pick
 };
 
-export type ModelId = "elephant" | "challenger";
+// "local" is the same elephant-1, quantized to 4 bits and run on this Mac with MLX.
+export type ModelId = "elephant" | "local" | "challenger";
 
 export type DecisionResult = {
   model: ModelId;
@@ -51,6 +52,14 @@ export type DecisionResult = {
   costUsd: number;
   reason?: string; // only the challenger can explain itself
   error?: string;
+};
+
+// A self-hosted elephant-1 server: the MLX port on a Mac, or llama.cpp with
+// the decision GGUF on an NVIDIA (or other) GPU.
+export type LocalBackend = {
+  kind: "mlx" | "llama.cpp";
+  label: string;
+  images: boolean;
 };
 
 export type ChallengerConfig = {
